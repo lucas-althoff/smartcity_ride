@@ -2,7 +2,6 @@ import time
 from datetime import datetime
 import decouple
 from supabase import create_client
-from supabase.client import SupabaseException
 
 
 class SupabaseConnect:
@@ -10,8 +9,11 @@ class SupabaseConnect:
 
     def __init__(self) -> None:
         """Metodo para iniciar conexão com a base inmemory SQLite"""
-        self.url = decouple.config("SUPABASE_URL")
-        self.key = decouple.config("SUPABASE_KEY_PUB")
+        try:
+            self.url = decouple.config("SUPABASE_URL")
+            self.key = decouple.config("SUPABASE_KEY_PUB")
+        except Exception as e:
+            raise Exception("Erro de leitura do .env" + f"{e}")
         self.max_tentativas = 3
         self.retry_delay = 5
 
@@ -51,13 +53,13 @@ class ObjetoSQL:
         self.obj_connect = SupabaseConnect()
         self.client = self.obj_connect.criar_client()
 
-    def processar_query_select(self, tabela, query='*'):
+    def processar_query_select(self, tabela: str, query='*') -> dict:
         """Metodo para aplicar select em uma tabela
         :return: retorno após rodar a query
         :rtype: <string>
         """
         try:
-            output = supabase.table(tabela).select(query).execute()
+            output = self.client.table(tabela).select(query).execute()
         except Exception as e:
             del self.obj_connect
             raise Exception("Erro ao tentar executar select" + f"{e}")
@@ -69,10 +71,10 @@ class ObjetoSQL:
         :rtype: <string>
         """
         try:
-            data, _ = supabase.table(tabela).insert(dados).execute()
+            data, _ = self.client.table(tabela).insert(dados).execute()
         except Exception:
             del self.obj_connect
-            raise Exception("Erro ao tentar executar inserrt" + f"{e}")
+            raise Exception("Erro ao tentar executar insert" + f"{e}")
         return data
 
     def encerrar(self):
