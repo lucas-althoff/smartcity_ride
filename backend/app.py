@@ -1,5 +1,5 @@
-from backend.application import api
-from backend.rotas import rotas
+from backend.src.application import api
+from backend.src.rotas import rotas
 from fastapi.staticfiles import StaticFiles
 
 
@@ -21,4 +21,4 @@ def __shutdown():
 
 api.include_router(rotas)
 api.mount("/static", StaticFiles(
-        directory="backend/static"), name="static")
+        directory="backend/src/static"), name="static")
