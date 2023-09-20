@@ -72,7 +72,7 @@ class ObjetoSQL:
         """
         try:
             data, _ = self.client.table(tabela).insert(dados).execute()
-        except Exception:
+        except Exception as e:
             del self.obj_connect
             raise Exception("Erro ao tentar executar insert" + f"{e}")
         return data

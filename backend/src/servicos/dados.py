@@ -1,9 +1,10 @@
 import pandas as pd
 from decouple import config
 import json
+from ast import literal_eval
 
 
-class Indicadores:
+class DadosIndicadores:
 
     def __init__(self):
         self.url = config("DRIVE_FILE")
@@ -21,3 +22,11 @@ class Indicadores:
             self.column_cleaner(column)
         self.dict_indicadores = self.df_indicadores.to_dict(orient='records')
         return {"indicadores": json.dumps(self.dict_indicadores, ensure_ascii=False)}
+
+
+if __name__ == "__main__":
+    ind = DadosIndicadores()
+    print(ind)
+    resultado = ind.reader()
+    print(type(resultado))
+    print(literal_eval(resultado['indicadores']),type(literal_eval(resultado['indicadores'])))
