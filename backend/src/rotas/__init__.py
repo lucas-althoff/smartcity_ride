@@ -15,11 +15,12 @@ def criar_saida(content, message=''):
 
 
 @rota_raiz.get(path="/",
-                 responses={200: {"description": "Ok", "content": {"image/jpeg": {"example": "pagina"}}},
-                            400: {"description": "not found"}},
-                 tags=["Home"],
-                 name="Página inicial",
-                 description="Apresenta página inicial do projeto")
+               responses={200: {"description": "Ok",
+                                "content": {"image/jpeg": {"example": "pagina"}}},
+                          400: {"description": "not found"}},
+               tags=["Home"],
+               name="Página inicial",
+               description="Apresenta página inicial do projeto")
 async def home(request: Request):
     """
     Função que renderiza a página estática home.
@@ -27,4 +28,3 @@ async def home(request: Request):
     :rtype: fastapi.Request
     """
     return templates.TemplateResponse("index.html", {"request": request})
-

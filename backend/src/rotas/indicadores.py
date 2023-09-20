@@ -1,8 +1,6 @@
 import json
 from ast import literal_eval
-import os
-from fastapi import APIRouter, Request
-from fastapi.templating import Jinja2Templates
+from fastapi import APIRouter
 from backend.src.database import ObjetoSQL
 from backend.src.schemas import Indicadores
 from backend.src.utils import criar_saida
@@ -90,6 +88,6 @@ async def delete_indicadores(request: Indicadores):
     """
     Função que deleta uma linha em tabela no Supabase.
     :returns: Lista de conteúdo devolvida pela query
-    :rtype: 
+    :rtype:
     """
     ...
