@@ -4,10 +4,10 @@ import json
 
 
 class Indicadores:
-
+    """Leitor dos dados de indicadores. Trata as entradas pada """
     def __init__(self):
         self.url = config("DRIVE_FILE")
-        self.df_indicadores = pd.DataFrame(columns=['id', 'dimensao', 'componente'])
+        self.df_indicadores = pd.DataFrame(columns=['id', 'nome', 'dimensao', 'topico'])
         self.dict_indicadores = {}
 
     def column_cleaner(self, col):

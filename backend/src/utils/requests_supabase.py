@@ -24,3 +24,8 @@ print(data)
 response = supabase.table('indicadores').select("*").execute()
 print(type(response), response)
 # dados = {"id":65, "nome":"Proteção do patrimônio cultural material e imaterial", "dimensao": "Sociocultural", "topico": "Cultura"}
+# dados = [{'id': 1, 'nome': 'EPlan: Planejamento', 'dimensao': 'Capacidades Institucionais', 'componente': 'Estratégia'},
+# {'id': 2, 'nome': 'GovCol: Governança colaborativa', 'dimensao': 'Capacidades Institucionais', 'componente': 'Estratégia'},
+# {'id': 3, 'nome': 'GovTec: Governança tecnológica', 'dimensao': 'Capacidades Institucionais', 'componente': 'Estratégia'},
+# {'id': 4, 'nome': 'SegPol: Seguimento de políticas públicas municipais', 'dimensao': 'Capacidades Institucionais', 'componente': 'Estratégia'},
+# {'id': 5, 'nome': 'SegPol: Seguimento de políticas públicas', 'dimensao': 'Capacidades Institucionais', 'componente': 'Estratégia'}]
