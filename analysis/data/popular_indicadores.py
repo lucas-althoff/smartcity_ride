@@ -19,6 +19,15 @@ payload_1 = {
     ]
 }
 
+payload_2 = [{'id_chave': 1, 'variaveis': {'EPlan': None}, 'municipio': 1},
+              {'id_chave': 2, 'variaveis': {'GovCol': None}, 'municipio': 1},
+              {'id_chave': 3, 'variaveis': {'GovTec': None}, 'municipio': 1},
+              {'id_chave': 1, 'variaveis': {'EPlan': None}, 'municipio': 2},
+              {'id_chave': 2, 'variaveis': {'GovCol': None}, 'municipio': 2},
+              {'id_chave': 3, 'variaveis': {'GovTec': None}, 'municipio': 2}]
+
+
+
 headers = {"Content-Type": "application/json"}
 url = "http://127.0.0.1:7777/indicadores"
 ind = Indicadores()
