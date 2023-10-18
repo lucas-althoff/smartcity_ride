@@ -152,7 +152,9 @@ class Eplan(Componente):
                 return False
 
     def maturidade(self, respostas: dict):
-        print(super().soma(respostas=respostas))
+        print("AQUI", super().soma(respostas=respostas))
+        print("Computando Eplan")
+        resultado = "Eplan1"  # Maturidade inicial
         for nivel in range(1, 8):
             if self.verificador_interno(respostas=respostas, nivel=nivel):
                 resultado = f"Eplan{nivel}"
@@ -222,7 +224,9 @@ class GovCol(Componente):
                 return False
 
     def maturidade(self, respostas: dict):
-        for nivel in range(1, 8):
+        print("Computando GovCol")
+        resultado = "GovCol2"
+        for nivel in range(2, 8):
             if self.verificador_interno(respostas=respostas, nivel=nivel):
                 resultado = f"GovCol{nivel}"
         return resultado
@@ -366,6 +370,8 @@ class GovTec(Componente):
                 return False
 
     def maturidade(self, respostas: dict):
+        print("Computando GovTec")
+        resultado = "GovTec1"
         for nivel in range(1, 8):
             if self.verificador_interno(respostas=respostas, nivel=nivel):
                 resultado = f"GovTec{nivel}"
@@ -415,6 +421,8 @@ class SegPol(Componente):
                 return False
 
     def maturidade(self, respostas: dict):
+        print("Computando SegPol")
+        resultado = "SegPol1"
         for nivel in range(1, 8):
             if self.verificador_interno(respostas=respostas, nivel=nivel):
                 resultado = f"SegPol{nivel}"
@@ -449,6 +457,8 @@ class Vis(Componente):
                 return False
 
     def maturidade(self, respostas: dict):
+        print("Computando Vis")
+        resultado = "Vis2"
         for nivel in range(1, 8):
             if self.verificador_interno(respostas=respostas, nivel=nivel):
                 resultado = f"Vis{nivel}"
@@ -508,10 +518,13 @@ class ITPlan(Componente):
                 return False
 
     def maturidade(self, respostas: dict):
+        print("Computando ITPlan")
+        resultado = "ITPlan1"
         for nivel in range(1, 8):
             if self.verificador_interno(respostas=respostas, nivel=nivel):
-                resultado = f"SegPol{nivel}"
+                resultado = f"ITPlan{nivel}"
         return resultado
+
 
 class Inst(Componente):
     def __init__(self):
@@ -596,9 +609,11 @@ class Inst(Componente):
                 return False
 
     def maturidade(self, respostas: dict):
+        print("Computando Inst")
+        resultado = "Inst1"
         for nivel in range(1, 8):
             if self.verificador_interno(respostas=respostas, nivel=nivel):
-                resultado = f"SegPol{nivel}"
+                resultado = f"Inst{nivel}"
         return resultado
 
 class IUPlan(Componente):

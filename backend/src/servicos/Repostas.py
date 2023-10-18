@@ -16,16 +16,32 @@ class Resposta:
     def reader(self):
         self.df_variaveis = pd.read_csv(StringIO(httpx.get(self.url).text))
 
+    # def treat_order_fields(self, field):
+    #     cols = [col for col in self.df_variaveis if col.startswith(field)]
+    #     df_aux = self.df_variaveis[cols]
+    #     df_aux1 = pd.DataFrame(columns=[field])
+
+    #     for idx, row in df_aux.iterrows():
+    #         col_label = f"{field}_{idx}"  # Create a unique column label
+    #         df_aux1[col_label] = [row.tolist()]
+
+    #         # df_aux1 = pd.concat(
+    #         #     [df_aux1, pd.DataFrame({field: [[val for val in row]]})])
+    #     print("FIELD ", field)
+    #     print("DF AUX1 ", type(df_aux1), df_aux1)
+    #     print("DF AUX ", type(df_aux), df_aux)
+    #     self.df_variaveis[field] = df_aux1
+    #     print("DF VARS ",self.df_variaveis.head())
+    #     self.df_variaveis.drop(cols, inplace=True, axis=1)
+
     def treat_order_fields(self, field):
         cols = [col for col in self.df_variaveis if col.startswith(field)]
         df_aux = self.df_variaveis[cols]
-        df_aux1 = pd.DataFrame(columns=[field])
 
-        for idx, row in df_aux.iterrows():
-            df_aux1 = pd.concat(
-                [df_aux1, pd.DataFrame({field: [[val for val in row]]})])
+        # Concatenate the columns from df_aux1 to self.df_variaveis
+        self.df_variaveis = pd.concat([self.df_variaveis, df_aux], axis=1)
 
-        self.df_variaveis[field] = df_aux1
+        # Drop the original columns from self.df_variaveis
         self.df_variaveis.drop(cols, inplace=True, axis=1)
 
     def treat_reg_fields(self, var):
