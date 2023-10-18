@@ -1,4 +1,3 @@
-import os
 import json
 from ast import literal_eval
 from fastapi import APIRouter
@@ -14,7 +13,7 @@ rota_var = APIRouter()
                          400: {"description": "not found"}},
               tags=["Variaveis"],
               name="Consultar dados na tabela variaveis",
-              description="Consulta tabela 'variaveis' na base de dados")
+              description="Consulta tabela 'variaveis' na base de dados", include_in_schema=False)
 async def get_variaveis():
     """
     Função que consulta uma tabela no Supabase.
@@ -32,7 +31,7 @@ async def get_variaveis():
                           400: {"description": "not found"}},
                tags=["Variaveis"],
                name="Inserir dados na tabela variaveis",
-               description="Atualizar linha da tabela 'variaveis' da base de dados")
+               description="Atualizar linha da tabela 'variaveis' da base de dados", include_in_schema=False)
 async def post_variaveis(request: Variavel):
     """
     Função que renderiza a página estática home.
@@ -58,7 +57,7 @@ async def post_variaveis(request: Variavel):
                          400: {"description": "not found"}},
               tags=["Variaveis"],
               name="Atualizar dados da tabela variaveis",
-              description="Atualizar linha da tabela 'variaveis' da base de dados.")
+              description="Atualizar linha da tabela 'variaveis' da base de dados.", include_in_schema=False)
 async def put_variaveis(request: Variavel):
     """
     Função que atualiza uma tabela no Supabase.
@@ -84,7 +83,7 @@ async def put_variaveis(request: Variavel):
                             400: {"description": "not found"}},
                  tags=["Variaveis"],
                  name="Deletar dados na tabela variaveis",
-                 description="Atualizar linha da tabela 'variaveis' da base de dados")
+                 description="Atualizar linha da tabela 'variaveis' da base de dados", include_in_schema=False)
 async def delete_indicadores(request: Variavel):
     """
     Função que deleta uma linha em tabela no Supabase.

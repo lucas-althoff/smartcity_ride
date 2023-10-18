@@ -6,13 +6,12 @@ class Componente:
         self.qualificadores = qualificadores
 
     def soma(self, respostas: dict):
-        peso = list(self.universo.values())
         soma = 0
-        for alternativa in self.universo:
-            if alternativa in respostas[alternativa.split('.')[0]]:
-                soma = soma + respostas.get(alternativa) * peso
-            else:
-                return soma
+        for alternativa, peso in self.universo.items():
+            prefix = alternativa.split('.')[0] 
+            if alternativa in respostas[prefix]:
+                soma = soma + peso
+        return soma
 
     def get_nivel_soma(self, respostas):
         soma = self.soma(respostas)
@@ -21,16 +20,16 @@ class Componente:
                 nivel_soma = nivel
         return nivel_soma
 
-    def get_nivel_fixador(self, respostas, nome_comp):
-        for nivel, fixador in self.fixadores.items():
-            for val in fixador:  # Cria lista com fixadores encontrados
-                encontrados = [any(v in n for n in respostas.values())
-                               for v in val]
-                if any(encontrados):  # Se todos qualificadores do nível foram encontrados, definir o nível
-                    nivel_quali = nivel
-                else:
-                    nivel_quali = nome_comp+"1"
-                return nivel_quali
+    def get_nivel_fixador(self, respostas):
+        # print("RESP", respostas)
+        for nivel, fixador in self.fixadores.items():  # Desempacotar lista de fixadores por nivel
+            for _, nota in respostas.items():  # Desempacotar lista de notas por questão
+                print("FIX", fixador)
+                print("NOTA", nota)
+                if fixador in list(nota):  # Se um fixador for encontrados na nota, definir o nível  
+                    return nivel
+        # nenhum fixador encontrado
+        return False
 
     def get_nivel_quali(self, respostas, nome_comp):
         for nivel, qualificador in self.qualificadores.items():
@@ -46,15 +45,16 @@ class Componente:
 
     def verificador(self, respostas: dict, nome_comp: str):
         # Verificar qual qualificadores estão presentes no nível mais alto
-        if not self.qualificadores and self.limite:  # Se nao tiver qualificadores
+        if not self.qualificadores and self.limite:  # Se nao tiver qualificadores e tiver regra baseado no somatório
             nivel = self.get_nivel_soma(respostas)[-1]
             return int(nivel[-1])
-        elif not self.limite and not self.qualificadores:  # Se nao tiver limites para soma
-            nivel = self.get_nivel_fixador(respostas, nome_comp)
+        # Se nao tiver regra baseada no somatório e nem baseada em qualificadores
+        elif not self.limite and not self.qualificadores:
+            nivel = self.get_nivel_fixador(respostas)
             return int(nivel[-1])
         else:
             nivel_soma = self.get_nivel_soma(respostas)
-            nivel_quali = self.get_nivel_quali(respostas, nome_comp)        
+            nivel_quali = self.get_nivel_quali(respostas, nome_comp)
             # Selecionar o nível de acordo com a melhor classificação
             if int(nivel_soma[-1]) > int(nivel_quali[-1]):
                 return int(nivel_soma[-1])
@@ -109,15 +109,59 @@ class Eplan(Componente):
                          qualificadores=self.qualificadores,
                          universo=self.universo)
 
+    def verificador_interno(self, respostas: dict, nivel: int):
+        # Verificar qual qualificadores estão presentes no nível mais alto
+        match nivel:
+            case 1:
+                if super().soma(respostas=respostas) == 0 or \
+                        all([v in respostas["EST03"] for v in self.fixadores["Eplan1"]]): 
+                    return True
+                return False
+            case 2:
+                if super().soma(respostas=respostas) == 1:
+                    return True
+                return False
+            case 3:
+                if super().get_nivel_soma(respostas=respostas) == "Eplan3":
+                    return True
+                return False
+            case 4:
+                print("QUALI", respostas["EST04"])
+                if super().soma(respostas=respostas) == 4 or \
+                        all([v in respostas["EST03"] for v in self.qualificadores["Eplan4"]]):  # Verifica se todos qualificadores estão presentes
+                    return True
+                return False
+            case 5:
+                if super().get_nivel_soma(respostas=respostas) == "Eplan5" or \
+                        all([v in respostas["EST03"] for v in self.qualificadores["Eplan5"]]):  # Verifica se todos qualificadores estão presentes
+                    return True
+                return False
+            case 6:
+                if super().get_nivel_soma(respostas=respostas) == "Eplan6" and \
+                        any([v in respostas['EST03'] for v in self.qualificadores["Eplan6"]]):  # Verifica se um dos qualificadores está presente
+                    return True
+                # Verifica se todos qualificadores estão presentes
+                elif all([v in respostas['EST03'] for v in self.qualificadores["Eplan6"]]):
+                    return True
+                else:
+                    return False
+            case 7:
+                if super().soma(respostas=respostas) >= 9 and \
+                        all([v in respostas['EST03'] for v in self.qualificadores["Eplan7"]]):  # Verifica se todos qualificadores estão presentes
+                    return True
+                return False
+
+    def maturidade(self, respostas: dict):
+        print(super().soma(respostas=respostas))
+        for nivel in range(1, 8):
+            if self.verificador_interno(respostas=respostas, nivel=nivel):
+                resultado = f"Eplan{nivel}"
+        return resultado
+
 
 class GovCol(Componente):
     def __init__(self):
-        self.fixadores = {"GovCol2": [],
-                          "GovCol3": [],
-                          "GovCol4": [],
-                          "GovCol5": [],
-                          "GovCol6": [],
-                          "GovCol7": []}
+        self.fixadores = {}
         self.qualificadores = {}
         self.universo = {"EST04.a": 0,
                          "EST04.b": 1,
@@ -146,19 +190,44 @@ class GovCol(Componente):
                          "EST06.1.k": 2,
                          "EST06.1.l": 1,
                          "EST06.1.n": 0}
-        self.limite = {"GovCol1": [0],
-                       "GovCol2": [1, 2, 3, 4, 5],
-                       "GovCol3": [6, 7, 8, 9, 10, 11],
-                       "GovCol4": [12, 13, 14, 15, 16, 17],
-                       "GovCol5": [18, 19, 20, 21, 22, 23],
-                       "GovCol6": [24, 25, 26, 27, 28, 29],
-                       "GovCol7": [list(range(30, 80))]}
         super().__init__(fixadores=self.fixadores,
                          qualificadores=self.qualificadores,
                          universo=self.universo)
 
+    def verificador_interno(self, respostas, nivel):
+        match nivel:
+            case 2:
+                if super().soma(respostas=respostas) in list(range(1, 6)):
+                    return True
+                return False
+            case 3:
+                if super().soma(respostas=respostas) in list(range(6, 12)):
+                    return True
+                return False
+            case 4:
+                if super().soma(respostas=respostas) in list(range(12, 18)):
+                    return True
+                return False
+            case 5:
+                if super().soma(respostas=respostas) in list(range(18, 24)):
+                    return True
+                return False
+            case 6:
+                if super().soma(respostas=respostas) in list(range(24, 30)):
+                    return True
+                return False
+            case 7:
+                if super().soma(respostas=respostas) >= 30:
+                    return True
+                return False
 
-#TODO: Implementar as regras para qualificadores
+    def maturidade(self, respostas: dict):
+        for nivel in range(1, 8):
+            if self.verificador_interno(respostas=respostas, nivel=nivel):
+                resultado = f"GovCol{nivel}"
+        return resultado
+
+
 class GovTec(Componente):
     def __init__(self):
         self.fixadores = {"GovTec1": ["EST05.d", "EST07.d"],
@@ -244,6 +313,64 @@ class GovTec(Componente):
                          qualificadores=self.qualificadores,
                          universo=self.universo)
 
+    def verificador_interno(self, respostas: dict, nivel: int):
+        # Verificar qual qualificadores estão presentes no nível mais alto
+        match nivel:
+            case 1:
+                if super().soma(respostas=respostas) >= 0 or \
+                        (all([v in respostas['EST05'] for v in self.fixadores["GovTec1"]]) and \
+                            all([v in respostas['EST07'] for v in self.fixadores["GovTec1"]])):
+                    return True
+                return False
+            case 2:
+                if super().soma(respostas=respostas) in self.limite['GovTec2']:
+                    return True
+                return False
+            case 3:
+                if super().soma(respostas=respostas) in self.limite['GovTec3'] or \
+                        (all([v in respostas['EST05'] for v in self.fixadores["GovTec3"]]) and \
+                            all([v in respostas['EST07'] for v in self.fixadores["GovTec3"]])):
+                    return True
+                return False
+            case 4:
+                if super().soma(respostas=respostas) in self.limite['GovTec4'] or \
+                        any([v in respostas['EST05'] for v in self.qualificadores["GovTec4"][:3]]) and \
+                        any([v in respostas['EST07'] for v in self.qualificadores["GovTec4"][3:]]):
+                    return True
+                return False
+            case 5:
+                if super().soma(respostas=respostas) in self.limite['GovTec5'] and \
+                        any([v in respostas['EST05'] for v in self.qualificadores["GovTec5"][:3]]) and \
+                        any([v in respostas['EST07'] for v in self.qualificadores["GovTec5"][3:]]):
+                    return True
+                return False
+            case 6:
+                c1 = super().get_nivel_soma(respostas=respostas) == "Eplan6"
+                c2 = (any([v in respostas['EST05'] for v in self.qualificadores["GovTec6"][:3]]) and \
+                      any([v in respostas['EST07'] for v in self.qualificadores["GovTec6"][3:6]]))
+                c3 = (all([v in respostas['EST05'] for v in self.qualificadores["GovTec6"][6:8]]) and \
+                      any([v in respostas['EST05'] for v in self.qualificadores["GovTec6"][8:13]]))
+                c4 = (all([v in respostas['EST07'] for v in self.qualificadores["GovTec6"][13:15]]) and \
+                      any([v in respostas['EST07'] for v in self.qualificadores["GovTec6"][15:]]))
+                if c1 and c2 and c3 and c4:
+                    return True
+                return False
+            case 7:
+                c1 = super().get_nivel_soma(respostas=respostas) == "Eplan7"
+                c2 = (any([v in respostas['EST05'] for v in self.qualificadores["GovTec7"][:3]]) and \
+                      any([v in respostas['EST07'] for v in self.qualificadores["GovTec7"][3:6]]))
+                c3 = all([v in respostas['EST05'] for v in self.qualificadores["GovTec7"][6:13]])
+                c4 = all([v in respostas['EST07'] for v in self.qualificadores["GovTec7"][13:]])
+                if c1 and c2 and c3 and c4:
+                    return True
+                return False
+
+    def maturidade(self, respostas: dict):
+        for nivel in range(1, 8):
+            if self.verificador_interno(respostas=respostas, nivel=nivel):
+                resultado = f"GovTec{nivel}"
+        return resultado
+
 
 class SegPol(Componente):
     def __init__(self):
@@ -260,6 +387,39 @@ class SegPol(Componente):
                          qualificadores=self.qualificadores,
                          universo=self.universo)
 
+    def verificador_interno(self, respostas, nivel):
+        match nivel:
+            case 1:
+                if all([v in respostas["EST06"] for v in self.fixadores["SegPol1"]]): 
+                    return True
+                return False
+            case 2:
+                if all([v in respostas["EST06"] for v in self.fixadores["SegPol2"]]): 
+                    return True
+                return False
+            case 3:
+                if all([v in respostas["EST06"] for v in self.fixadores["SegPol3"]]): 
+                    return True
+                return False
+            case 4:
+                if all([v in respostas["EST06"] for v in self.fixadores["SegPol4"]]): 
+                    return True
+                return False
+            case 5:
+                if all([v in respostas["EST06"] for v in self.fixadores["SegPol5"]]): 
+                    return True
+                return False
+            case 6:
+                if all([v in respostas["EST06"] for v in self.fixadores["SegPol6"]]): 
+                    return True
+                return False
+
+    def maturidade(self, respostas: dict):
+        for nivel in range(1, 8):
+            if self.verificador_interno(respostas=respostas, nivel=nivel):
+                resultado = f"SegPol{nivel}"
+        return resultado
+
 
 class Vis(Componente):
     def __init__(self):
@@ -272,3 +432,298 @@ class Vis(Componente):
         super().__init__(fixadores=self.fixadores,
                          qualificadores=self.qualificadores,
                          universo=self.universo)
+
+    def verificador_interno(self, respostas, nivel):
+        match nivel:
+            case 2:
+                if all([v in respostas["EST09"] for v in self.fixadores["Vis2"]]): 
+                    return True
+                return False
+            case 3:
+                if all([v in respostas["EST09"] for v in self.fixadores["Vis3"]]): 
+                    return True
+                return False
+            case 4:
+                if all([v in respostas["EST09"] for v in self.fixadores["Vis4"]]): 
+                    return True
+                return False
+
+    def maturidade(self, respostas: dict):
+        for nivel in range(1, 8):
+            if self.verificador_interno(respostas=respostas, nivel=nivel):
+                resultado = f"Vis{nivel}"
+        return resultado
+
+
+# Infraestrutura
+class ITPlan(Componente):
+    def __init__(self):
+        self.fixadores = {"ITPlan1": ["INF05.b"],
+                          "ITPlan3": ["INF05.1.b"],
+                          "ITPlan4": ["INF05.a", "INF05.2.b"],
+                          "ITPlan5": ["INF05.2.a", "INF05.3.b", "INF05.4.b"],
+                          "ITPlan6": ["INF05.3.a", "INF05.4.a", "INF05.5.b"],
+                          "ITPlan7": ["INF05.5.a"]}
+        self.qualificadores = {"ITPlan2": ["INF05.1.a","INF05.b"]}
+        self.universo = {}
+        self.limite = {}
+        super().__init__(fixadores=self.fixadores,
+                         qualificadores=self.qualificadores,
+                         universo=self.universo)
+
+    def verificador_interno(self, respostas, nivel):
+        match nivel:
+            case 1:
+                if any([v in respostas["INF05"] for v in self.fixadores["ITPlan1"]]): 
+                    return True
+                return False
+            case 2:
+                if any([v in respostas["INF05.1"] for v in self.qualificadores["ITPlan2"][0]]): 
+                    return True
+                return False
+            case 3:
+                if all([v in respostas["INF05.1"] for v in self.fixadores["ITPlan3"]]): 
+                    return True
+                return False
+            case 4:
+                if any([v in respostas["INF05"] for v in self.fixadores["ITPlan4"]]) and \
+                    any([v in respostas["INF05.2"] for v in self.fixadores["ITPlan4"]]):
+                    return True
+                return False
+            case 5:
+                if any([v in respostas["INF05.2"] for v in self.fixadores["ITPlan5"]]) and \
+                    any([v in respostas["INF05.3"] for v in self.fixadores["ITPlan5"]]) and \
+                    any([v in respostas["INF05.4"] for v in self.fixadores["ITPlan5"]]):
+                    return True
+                return False
+            case 6:
+                if any([v in respostas["INF05.3"] for v in self.fixadores["ITPlan6"]]) and \
+                    any([v in respostas["INF05.4"] for v in self.fixadores["ITPlan6"]]) and \
+                    any([v in respostas["INF05.5"] for v in self.fixadores["ITPlan6"]]):
+                    return True
+                return False
+            case 7:
+                if all([v in respostas["INF05.6"] for v in self.fixadores["ITPlan3"]]): 
+                    return True
+                return False
+
+    def maturidade(self, respostas: dict):
+        for nivel in range(1, 8):
+            if self.verificador_interno(respostas=respostas, nivel=nivel):
+                resultado = f"SegPol{nivel}"
+        return resultado
+
+class Inst(Componente):
+    def __init__(self):
+        self.fixadores = {"Inst1": ["INF05.b"],
+                          "Inst3": ["INF05.1.b"],
+                          "Inst4": ["INF05.a", "INF05.2.b"],
+                          "Inst5": ["INF05.2.a", "INF05.3.b", "INF05.4.b"],
+                          "Inst6": ["INF05.3.a", "INF05.4.a", "INF05.5.b"],
+                          "Inst7": ["INF05.5.a"]}
+        self.qualificadores = {"Inst1": ["INF01.b","INF01.c"]}
+        self.universo = {
+            "INF02.aa": 0,
+            "INF02.ab": 0,
+            "INF02.ac": 0,
+            "INF02.ba": 1,
+            "INF02.bb": 1,
+            "INF02.bc": 1,
+            "INF02.ca": 1,
+            "INF02.cb": 1,
+            "INF02.cc": 1,
+            "INF02.da": 2,
+            "INF02.db": 2,
+            "INF02.dc": 2,
+            "INF02.ea": 4,
+            "INF02.eb": 2,
+            "INF02.ec": 2,
+            "INF02.fa": 4,
+            "INF02.fb": 2,
+            "INF02.fc": 2,
+            "INF02.ga": 0,
+            "INF02.gb": 0,
+            "INF02.gc": 0
+        }
+        self.limite = {
+            "ITPlan1": [0, 1],
+            "ITPlan3": [],
+            "ITPlan4": [],
+            "ITPlan5": [],
+            "ITPlan6": [],
+            "ITPlan7": []
+        }
+        super().__init__(fixadores=self.fixadores,
+                         qualificadores=self.qualificadores,
+                         universo=self.universo)
+
+    def verificador_interno(self, respostas, nivel):
+        match nivel:
+            case 1:
+                if super().soma in [0, 1] and \
+                    any([v in respostas["INF01"] for v in self.qualificadores["Inst1"]]): 
+                    return True
+                return False
+            case 2:
+                if super().soma(respostas=respostas) in [2, 3] and \
+                    any([v in respostas["INF01.1"] for v in self.qualificadores["Inst2"]]): 
+                    return True
+                return False
+            case 3:
+                if super().soma(respostas=respostas) in [4, 5] and \
+                    any([v in respostas["INF01.1"] for v in self.fixadores["Inst3"]]):
+                    return True
+                return False
+            case 4:
+                if super().soma(respostas=respostas) in [6, 7] and \
+                    any([v in respostas["INF01"] for v in self.fixadores["Inst4"]]):
+                    return True
+                return False
+            case 5:
+                if super().soma(respostas=respostas) in [8, 9] and \
+                    any([v in respostas["INF01"] for v in self.fixadores["Inst5"]]):
+                    return True
+                return False
+            case 6:
+                if super().soma(respostas=respostas) in [10, 11] and \
+                    any([v in respostas["INF01"] for v in self.fixadores["Inst6"]]):
+                    return True
+                return False
+            case 7:
+                if super().soma(respostas=respostas) in [10, 11] and \
+                    all([v in respostas["INF01"] for v in self.fixadores["Inst7"]]): 
+                    return True
+                return False
+
+    def maturidade(self, respostas: dict):
+        for nivel in range(1, 8):
+            if self.verificador_interno(respostas=respostas, nivel=nivel):
+                resultado = f"SegPol{nivel}"
+        return resultado
+
+class IUPlan(Componente):
+    def __init__(self):
+       self.nivel = 1
+    def maturidade(self, respostas: dict):
+        resultado = f"SegPol{self.nivel}"
+        return resultado
+    
+class AQua(Componente):
+    def __init__(self):
+       self.nivel = 1
+    def maturidade(self, respostas: dict):
+        resultado = f"SegPol{self.nivel}"
+        return resultado
+
+class HwSw(Componente):
+    def __init__(self):
+       self.nivel = 1
+    def maturidade(self, respostas: dict):
+        resultado = f"SegPol{self.nivel}"
+        return resultado
+
+class GovTI(Componente):
+    def __init__(self):
+       self.nivel = 1
+    def maturidade(self, respostas: dict):
+        resultado = f"SegPol{self.nivel}"
+        return resultado
+
+# DADOS
+class DPlan(Componente):
+    def __init__(self):
+       self.nivel = 1
+    def maturidade(self, respostas: dict):
+        resultado = f"SegPol{self.nivel}"
+        return resultado
+    
+class Digi(Componente):
+    def __init__(self):
+       self.nivel = 1
+    def maturidade(self, respostas: dict):
+        resultado = f"SegPol{self.nivel}"
+        return resultado
+
+
+class DTransp(Componente):
+    def __init__(self):
+       self.nivel = 1
+    def maturidade(self, respostas: dict):
+        resultado = f"SegPol{self.nivel}"
+        return resultado
+
+
+class DInteg(Componente):
+    def __init__(self):
+       self.nivel = 1
+    def maturidade(self, respostas: dict):
+        resultado = f"SegPol{self.nivel}"
+        return resultado
+
+# Serviços e Aplicações
+class SPlan(Componente):
+    def __init__(self):
+       self.nivel = 1
+    def maturidade(self, respostas: dict):
+        resultado = f"SegPol{self.nivel}"
+        return resultado
+
+class SUrb(Componente):
+    def __init__(self):
+       self.nivel = 1
+    def maturidade(self, respostas: dict):
+        resultado = f"SegPol{self.nivel}"
+        return resultado
+
+class SOn(Componente):
+    def __init__(self):
+       self.nivel = 1
+    def maturidade(self, respostas: dict):
+        resultado = f"SegPol{self.nivel}"
+        return resultado
+
+class SInteg(Componente):
+    def __init__(self):
+       self.nivel = 1
+    def maturidade(self, respostas: dict):
+        resultado = f"SegPol{self.nivel}"
+        return resultado
+
+# Monitoramento
+class MPlan(Componente):
+    def __init__(self):
+       self.nivel = 1
+    def maturidade(self, respostas: dict):
+        resultado = f"SegPol{self.nivel}"
+        return resultado
+    
+
+class Coord(Componente):
+    def __init__(self):
+       self.nivel = 1
+    def maturidade(self, respostas: dict):
+        resultado = f"SegPol{self.nivel}"
+        return resultado
+
+
+class Perc(Componente):
+    def __init__(self):
+       self.nivel = 1
+    def maturidade(self, respostas: dict):
+        resultado = f"SegPol{self.nivel}"
+        return resultado
+
+
+class MTransp(Componente):
+    def __init__(self):
+       self.nivel = 1
+    def maturidade(self, respostas: dict):
+        resultado = f"SegPol{self.nivel}"
+        return resultado
+
+
+if "__main__" == __name__:
+    notas = {'EST03': ['EST03.g'], 'EST03.1': ['EST03.1.b'], 'EST04': ['EST04.f'], 'EST05': ['EST05.a', 'EST05.b', 'EST05.h', 'EST05.g'], 'EST05.1': ['EST05.1.b'], 'EST06': ['EST06.a'], 'EST06.1': ['EST06.1.h'], 'EST07': ['EST07.g'], 'EST07.1': [
+        'EST07.1.e'], 'EST08': ['EST08.b'], 'EST09': ['EST09.c'], 'EST01': ['EST01.a', 'EST01.b', 'EST01.c', 'EST01.d', 'EST01.e'], 'EST02': ['EST02.a', 'EST02.b', 'EST02.c', 'EST02.d', 'EST02.e'], 'municipio': 'Cabeceira Grande (MG)'}
+    obj = SegPol()
+    print(obj.maturidade(respostas=notas))

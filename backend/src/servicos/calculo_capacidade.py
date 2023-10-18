@@ -77,6 +77,7 @@ if __name__ == "__main__":
     #                              "ServicosApp": respostas_servicosApp,
     #                              "Monitoramento": respostas_monitoramento}}
 
+
     pontuadores = {"Eplan": Eplan(), "GovCol": GovCol(),
                    "GovTec": GovTec(), "SegPol": SegPol(),
                    "Vis": Vis()}

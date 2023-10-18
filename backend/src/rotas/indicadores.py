@@ -13,7 +13,7 @@ rota_ind = APIRouter()
                          400: {"description": "not found"}},
               tags=["Indicadores"],
               name="Consultar Indicadores",
-              description="Consulta Indicadores")
+              description="Consulta Indicadores", include_in_schema=False)
 async def get_indicadores():
     """
     Função que consulta uma tabela no Supabase.
@@ -31,7 +31,7 @@ async def get_indicadores():
                           400: {"description": "not found"}},
                tags=["Indicadores"],
                name="Inserir Indicadores",
-               description="Alimentar Tabela Indicadores")
+               description="Alimentar Tabela Indicadores", include_in_schema=False)
 async def post_indicadores(request: Indicadores):
     """
     Função que insere dados em uma tabela no Supabase.
@@ -57,7 +57,7 @@ async def post_indicadores(request: Indicadores):
                          400: {"description": "not found"}},
               tags=["Indicadores"],
               name="Atualizar Indicadores",
-              description="Alimentar Tabela Indicadores")
+              description="Alimentar Tabela Indicadores", include_in_schema=False)
 async def put_indicadores(request: Indicadores):
     """
     Função que atualiza uma tabela no Supabase.
@@ -83,7 +83,7 @@ async def put_indicadores(request: Indicadores):
                             400: {"description": "not found"}},
                  tags=["Indicadores"],
                  name="Deletar Indicadores",
-                 description="Alimentar Tabela Indicadores")
+                 description="Alimentar Tabela Indicadores", include_in_schema=False)
 async def delete_indicadores(request: Indicadores):
     """
     Função que deleta uma linha em tabela no Supabase.

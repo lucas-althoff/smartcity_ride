@@ -20,7 +20,7 @@ def criar_saida(content, message=''):
                           400: {"description": "not found"}},
                tags=["Home"],
                name="Página inicial",
-               description="Apresenta página inicial do projeto")
+               description="Apresenta página inicial do projeto", include_in_schema=False)
 async def home(request: Request):
     """
     Função que renderiza a página estática home.
@@ -28,3 +28,8 @@ async def home(request: Request):
     :rtype: fastapi.Request
     """
     return templates.TemplateResponse("index.html", {"request": request})
+
+
+@rota_raiz.get("/healthcheck", include_in_schema=False)
+def read_root():
+    return {"status": "ok"}

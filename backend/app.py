@@ -3,6 +3,7 @@ from backend.src.application import api
 from backend.src.rotas import rota_raiz
 from backend.src.rotas.indicadores import rota_ind
 from backend.src.rotas.variaveis import rota_var
+from backend.src.rotas.maturidades import rota_maturidade
 from fastapi.staticfiles import StaticFiles
 
 
@@ -25,5 +26,6 @@ def __shutdown():
 api.include_router(rota_raiz)
 api.include_router(rota_ind)
 api.include_router(rota_var)
+api.include_router(rota_maturidade)
 api.mount("/static", StaticFiles(
-        directory="backend/src/static"), name="static")
+        directory="./backend/src/static"), name="static")
