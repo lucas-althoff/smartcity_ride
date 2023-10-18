@@ -1,11 +1,29 @@
-from Componentes import *
-from Repostas import Resposta
+import json
+from ast import literal_eval
+from fastapi import APIRouter
+from backend.src.database import ObjetoSQL
+from backend.src.schemas import Indicadores
+from backend.src.utils import criar_saida
+from backend.src.servicos.Componentes import *
+from backend.src.servicos.Repostas import Resposta
 from datetime import datetime
-from Maturidade import Nivel
-from FormUploader import FormUploader
+from backend.src.servicos.Maturidade import Nivel
+from backend.src.servicos.FormUploader import FormUploader
 import pandas as pd
 
-if __name__ == "__main__":
+@rota_ind.get(path="/maturidades",
+              responses={200: {"message": "Ok", "content": ""},
+                         400: {"description": "not found"}},
+              tags=["Maturidades"],
+              name="Gerar Maturidades",
+              description="Gera Maturidades")
+async def get_maturidades():
+    """
+        Função que executa o tratamento dos formulários e calcula a maturidade.
+        :returns: Lista de conteúdo devolvida pela query
+        :rtype:
+        """
+
     nivel_capacidade = {"Estrategia": 1,
                         "Infraestrutura": 1,
                         "Dados": 1,
