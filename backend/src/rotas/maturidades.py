@@ -4,7 +4,7 @@ from backend.src.servicos.Componentes import *
 from backend.src.servicos.Repostas import Resposta
 from backend.src.servicos.Maturidade import Nivel
 from backend.src.servicos.FormUploader import FormUploader
-from datetime import datetime
+from datetime import datetime, timedelta
 import pandas as pd
 
 rota_maturidade = APIRouter()
@@ -81,7 +81,8 @@ async def render_maturidades():
     :rtype:
     """
     json_data = await get_maturidades()
-    ultima_atualizacao = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    ultima_atualizacao = datetime.now() - timedelta(hours=3)
+    ultima_atualizacao = ultima_atualizacao.strftime('%Y-%m-%d %H:%M:%S')
 
     html_content = """
     <!DOCTYPE html>
