@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for smartcity-ride on 2023-10-18T17:16:48-03:00
+# fly.toml app configuration file generated for smartcity-ride on 2023-10-23T09:11:35-03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -10,7 +10,8 @@ primary_region = "gru"
 
 [env]
   DRIVE_FILE = "https://docs.google.com/spreadsheets/d/1EdqxBjr8ayXVW1GDnbHlQh-6m-Ca9jwqflGdMCbcTzk/gviz/tq?tqx=out:csv&sheet=Indicadores%20MMCISB"
-  DRIVE_FORM_FILE = "https://docs.google.com/spreadsheets/d/11UWYEAG8O_JqONGw8PAqR_oX0TWzpF3kemAdSuhNI00/gviz/tq?tqx=out:csv&sheet=Respostas%20ao%20formulário%201"
+  DRIVE_FORM_FILE = "https://docs.google.com/spreadsheets/d/11UWYEAG8O_JqONGw8PAqR_oX0TWzpF3kemAdSuhNI00/gviz/tq?tqx=out:csv&sheet=capacidades_form1"
+  DRIVE_FORM_FILE2 = "https://docs.google.com/spreadsheets/d/11UWYEAG8O_JqONGw8PAqR_oX0TWzpF3kemAdSuhNI00/gviz/tq?tqx=out:csv&sheet=capacidades_form2"
   FLY_TOKEN = "fo1_Dh3M3_WltQsQvoRAY6bw3kwDK_mmb1mDSdPRyaJEkQA"
   SUPABASE_URL = "https://iocnalrxtebiochqytvs.supabase.co"
 
