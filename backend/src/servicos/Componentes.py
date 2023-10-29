@@ -8,7 +8,7 @@ class Componente:
     def soma(self, respostas: dict):
         soma = 0
         for alternativa, peso in self.universo.items():
-            prefix = alternativa.split('.')[0] 
+            prefix = alternativa.split('.')[0]
             if alternativa in respostas[prefix]:
                 soma = soma + peso
         return soma
@@ -26,7 +26,8 @@ class Componente:
             for _, nota in respostas.items():  # Desempacotar lista de notas por questão
                 print("FIX", fixador)
                 print("NOTA", nota)
-                if fixador in list(nota):  # Se um fixador for encontrados na nota, definir o nível  
+                # Se um fixador for encontrados na nota, definir o nível
+                if fixador in list(nota):
                     return nivel
         # nenhum fixador encontrado
         return False
@@ -114,7 +115,7 @@ class Eplan(Componente):
         match nivel:
             case 1:
                 if super().soma(respostas=respostas) == 0 or \
-                        all([v in respostas["EST03"] for v in self.fixadores["Eplan1"]]): 
+                        all([v in respostas["EST03"] for v in self.fixadores["Eplan1"]]):
                     return True
                 return False
             case 2:
@@ -322,7 +323,7 @@ class GovTec(Componente):
         match nivel:
             case 1:
                 if super().soma(respostas=respostas) >= 0 or \
-                        (all([v in respostas['EST05'] for v in self.fixadores["GovTec1"]]) and \
+                        (all([v in respostas['EST05'] for v in self.fixadores["GovTec1"]]) and
                             all([v in respostas['EST07'] for v in self.fixadores["GovTec1"]])):
                     return True
                 return False
@@ -332,7 +333,7 @@ class GovTec(Componente):
                 return False
             case 3:
                 if super().soma(respostas=respostas) in self.limite['GovTec3'] or \
-                        (all([v in respostas['EST05'] for v in self.fixadores["GovTec3"]]) and \
+                        (all([v in respostas['EST05'] for v in self.fixadores["GovTec3"]]) and
                             all([v in respostas['EST07'] for v in self.fixadores["GovTec3"]])):
                     return True
                 return False
@@ -350,21 +351,23 @@ class GovTec(Componente):
                 return False
             case 6:
                 c1 = super().get_nivel_soma(respostas=respostas) == "Eplan6"
-                c2 = (any([v in respostas['EST05'] for v in self.qualificadores["GovTec6"][:3]]) and \
+                c2 = (any([v in respostas['EST05'] for v in self.qualificadores["GovTec6"][:3]]) and
                       any([v in respostas['EST07'] for v in self.qualificadores["GovTec6"][3:6]]))
-                c3 = (all([v in respostas['EST05'] for v in self.qualificadores["GovTec6"][6:8]]) and \
+                c3 = (all([v in respostas['EST05'] for v in self.qualificadores["GovTec6"][6:8]]) and
                       any([v in respostas['EST05'] for v in self.qualificadores["GovTec6"][8:13]]))
-                c4 = (all([v in respostas['EST07'] for v in self.qualificadores["GovTec6"][13:15]]) and \
+                c4 = (all([v in respostas['EST07'] for v in self.qualificadores["GovTec6"][13:15]]) and
                       any([v in respostas['EST07'] for v in self.qualificadores["GovTec6"][15:]]))
                 if c1 and c2 and c3 and c4:
                     return True
                 return False
             case 7:
                 c1 = super().get_nivel_soma(respostas=respostas) == "Eplan7"
-                c2 = (any([v in respostas['EST05'] for v in self.qualificadores["GovTec7"][:3]]) and \
+                c2 = (any([v in respostas['EST05'] for v in self.qualificadores["GovTec7"][:3]]) and
                       any([v in respostas['EST07'] for v in self.qualificadores["GovTec7"][3:6]]))
-                c3 = all([v in respostas['EST05'] for v in self.qualificadores["GovTec7"][6:13]])
-                c4 = all([v in respostas['EST07'] for v in self.qualificadores["GovTec7"][13:]])
+                c3 = all([v in respostas['EST05']
+                         for v in self.qualificadores["GovTec7"][6:13]])
+                c4 = all([v in respostas['EST07']
+                         for v in self.qualificadores["GovTec7"][13:]])
                 if c1 and c2 and c3 and c4:
                     return True
                 return False
@@ -396,27 +399,27 @@ class SegPol(Componente):
     def verificador_interno(self, respostas, nivel):
         match nivel:
             case 1:
-                if all([v in respostas["EST06"] for v in self.fixadores["SegPol1"]]): 
+                if all([v in respostas["EST06"] for v in self.fixadores["SegPol1"]]):
                     return True
                 return False
             case 2:
-                if all([v in respostas["EST06"] for v in self.fixadores["SegPol2"]]): 
+                if all([v in respostas["EST06"] for v in self.fixadores["SegPol2"]]):
                     return True
                 return False
             case 3:
-                if all([v in respostas["EST06"] for v in self.fixadores["SegPol3"]]): 
+                if all([v in respostas["EST06"] for v in self.fixadores["SegPol3"]]):
                     return True
                 return False
             case 4:
-                if all([v in respostas["EST06"] for v in self.fixadores["SegPol4"]]): 
+                if all([v in respostas["EST06"] for v in self.fixadores["SegPol4"]]):
                     return True
                 return False
             case 5:
-                if all([v in respostas["EST06"] for v in self.fixadores["SegPol5"]]): 
+                if all([v in respostas["EST06"] for v in self.fixadores["SegPol5"]]):
                     return True
                 return False
             case 6:
-                if all([v in respostas["EST06"] for v in self.fixadores["SegPol6"]]): 
+                if all([v in respostas["EST06"] for v in self.fixadores["SegPol6"]]):
                     return True
                 return False
 
@@ -444,15 +447,15 @@ class Vis(Componente):
     def verificador_interno(self, respostas, nivel):
         match nivel:
             case 2:
-                if all([v in respostas["EST09"] for v in self.fixadores["Vis2"]]): 
+                if all([v in respostas["EST09"] for v in self.fixadores["Vis2"]]):
                     return True
                 return False
             case 3:
-                if all([v in respostas["EST09"] for v in self.fixadores["Vis3"]]): 
+                if all([v in respostas["EST09"] for v in self.fixadores["Vis3"]]):
                     return True
                 return False
             case 4:
-                if all([v in respostas["EST09"] for v in self.fixadores["Vis4"]]): 
+                if all([v in respostas["EST09"] for v in self.fixadores["Vis4"]]):
                     return True
                 return False
 
@@ -474,7 +477,7 @@ class ITPlan(Componente):
                           "ITPlan5": ["INF05.2.a", "INF05.3.b", "INF05.4.b"],
                           "ITPlan6": ["INF05.3.a", "INF05.4.a", "INF05.5.b"],
                           "ITPlan7": ["INF05.5.a"]}
-        self.qualificadores = {"ITPlan2": ["INF05.1.a","INF05.b"]}
+        self.qualificadores = {"ITPlan2": ["INF05.1.a", "INF05.b"]}
         self.universo = {}
         self.limite = {}
         super().__init__(fixadores=self.fixadores,
@@ -484,36 +487,36 @@ class ITPlan(Componente):
     def verificador_interno(self, respostas, nivel):
         match nivel:
             case 1:
-                if any([v in respostas["INF05"] for v in self.fixadores["ITPlan1"]]): 
+                if any([v in respostas["INF05"] for v in self.fixadores["ITPlan1"]]):
                     return True
                 return False
             case 2:
-                if any([v in respostas["INF05.1"] for v in self.qualificadores["ITPlan2"][0]]): 
+                if any([v in respostas["INF05.1"] for v in self.qualificadores["ITPlan2"][0]]):
                     return True
                 return False
             case 3:
-                if all([v in respostas["INF05.1"] for v in self.fixadores["ITPlan3"]]): 
+                if all([v in respostas["INF05.1"] for v in self.fixadores["ITPlan3"]]):
                     return True
                 return False
             case 4:
                 if any([v in respostas["INF05"] for v in self.fixadores["ITPlan4"]]) and \
-                    any([v in respostas["INF05.2"] for v in self.fixadores["ITPlan4"]]):
+                        any([v in respostas["INF05.2"] for v in self.fixadores["ITPlan4"]]):
                     return True
                 return False
             case 5:
                 if any([v in respostas["INF05.2"] for v in self.fixadores["ITPlan5"]]) and \
-                    any([v in respostas["INF05.3"] for v in self.fixadores["ITPlan5"]]) and \
-                    any([v in respostas["INF05.4"] for v in self.fixadores["ITPlan5"]]):
+                        any([v in respostas["INF05.3"] for v in self.fixadores["ITPlan5"]]) and \
+                        any([v in respostas["INF05.4"] for v in self.fixadores["ITPlan5"]]):
                     return True
                 return False
             case 6:
                 if any([v in respostas["INF05.3"] for v in self.fixadores["ITPlan6"]]) and \
-                    any([v in respostas["INF05.4"] for v in self.fixadores["ITPlan6"]]) and \
-                    any([v in respostas["INF05.5"] for v in self.fixadores["ITPlan6"]]):
+                        any([v in respostas["INF05.4"] for v in self.fixadores["ITPlan6"]]) and \
+                        any([v in respostas["INF05.5"] for v in self.fixadores["ITPlan6"]]):
                     return True
                 return False
             case 7:
-                if all([v in respostas["INF05.6"] for v in self.fixadores["ITPlan3"]]): 
+                if all([v in respostas["INF05.6"] for v in self.fixadores["ITPlan3"]]):
                     return True
                 return False
 
@@ -534,7 +537,7 @@ class Inst(Componente):
                           "Inst5": ["INF05.2.a", "INF05.3.b", "INF05.4.b"],
                           "Inst6": ["INF05.3.a", "INF05.4.a", "INF05.5.b"],
                           "Inst7": ["INF05.5.a"]}
-        self.qualificadores = {"Inst1": ["INF01.b","INF01.c"]}
+        self.qualificadores = {"Inst1": ["INF01.b", "INF01.c"]}
         self.universo = {
             "INF02.aa": 0,
             "INF02.ab": 0,
@@ -574,37 +577,37 @@ class Inst(Componente):
         match nivel:
             case 1:
                 if super().soma in [0, 1] and \
-                    any([v in respostas["INF01"] for v in self.qualificadores["Inst1"]]): 
+                        any([v in respostas["INF01"] for v in self.qualificadores["Inst1"]]):
                     return True
                 return False
             case 2:
                 if super().soma(respostas=respostas) in [2, 3] and \
-                    any([v in respostas["INF01.1"] for v in self.qualificadores["Inst2"]]): 
+                        any([v in respostas["INF01.1"] for v in self.qualificadores["Inst2"]]):
                     return True
                 return False
             case 3:
                 if super().soma(respostas=respostas) in [4, 5] and \
-                    any([v in respostas["INF01.1"] for v in self.fixadores["Inst3"]]):
+                        any([v in respostas["INF01.1"] for v in self.fixadores["Inst3"]]):
                     return True
                 return False
             case 4:
                 if super().soma(respostas=respostas) in [6, 7] and \
-                    any([v in respostas["INF01"] for v in self.fixadores["Inst4"]]):
+                        any([v in respostas["INF01"] for v in self.fixadores["Inst4"]]):
                     return True
                 return False
             case 5:
                 if super().soma(respostas=respostas) in [8, 9] and \
-                    any([v in respostas["INF01"] for v in self.fixadores["Inst5"]]):
+                        any([v in respostas["INF01"] for v in self.fixadores["Inst5"]]):
                     return True
                 return False
             case 6:
                 if super().soma(respostas=respostas) in [10, 11] and \
-                    any([v in respostas["INF01"] for v in self.fixadores["Inst6"]]):
+                        any([v in respostas["INF01"] for v in self.fixadores["Inst6"]]):
                     return True
                 return False
             case 7:
                 if super().soma(respostas=respostas) in [10, 11] and \
-                    all([v in respostas["INF01"] for v in self.fixadores["Inst7"]]): 
+                        all([v in respostas["INF01"] for v in self.fixadores["Inst7"]]):
                     return True
                 return False
 
@@ -616,45 +619,58 @@ class Inst(Componente):
                 resultado = f"Inst{nivel}"
         return resultado
 
+
 class IUPlan(Componente):
     def __init__(self):
-       self.nivel = 1
+        self.nivel = 1
+
     def maturidade(self, respostas: dict):
         resultado = f"SegPol{self.nivel}"
         return resultado
-    
+
+
 class AQua(Componente):
     def __init__(self):
-       self.nivel = 1
+        self.nivel = 1
+
     def maturidade(self, respostas: dict):
         resultado = f"SegPol{self.nivel}"
         return resultado
+
 
 class HwSw(Componente):
     def __init__(self):
-       self.nivel = 1
+        self.nivel = 1
+
     def maturidade(self, respostas: dict):
         resultado = f"SegPol{self.nivel}"
         return resultado
 
+
 class GovTI(Componente):
     def __init__(self):
-       self.nivel = 1
+        self.nivel = 1
+
     def maturidade(self, respostas: dict):
         resultado = f"SegPol{self.nivel}"
         return resultado
 
 # DADOS
+
+
 class DPlan(Componente):
     def __init__(self):
-       self.nivel = 1
+        self.nivel = 1
+
     def maturidade(self, respostas: dict):
         resultado = f"SegPol{self.nivel}"
         return resultado
-    
+
+
 class Digi(Componente):
     def __init__(self):
-       self.nivel = 1
+        self.nivel = 1
+
     def maturidade(self, respostas: dict):
         resultado = f"SegPol{self.nivel}"
         return resultado
@@ -662,7 +678,8 @@ class Digi(Componente):
 
 class DTransp(Componente):
     def __init__(self):
-       self.nivel = 1
+        self.nivel = 1
+
     def maturidade(self, respostas: dict):
         resultado = f"SegPol{self.nivel}"
         return resultado
@@ -670,52 +687,66 @@ class DTransp(Componente):
 
 class DInteg(Componente):
     def __init__(self):
-       self.nivel = 1
+        self.nivel = 1
+
     def maturidade(self, respostas: dict):
         resultado = f"SegPol{self.nivel}"
         return resultado
 
 # Serviços e Aplicações
+
+
 class SPlan(Componente):
     def __init__(self):
-       self.nivel = 1
+        self.nivel = 1
+
     def maturidade(self, respostas: dict):
         resultado = f"SegPol{self.nivel}"
         return resultado
+
 
 class SUrb(Componente):
     def __init__(self):
-       self.nivel = 1
+        self.nivel = 1
+
     def maturidade(self, respostas: dict):
         resultado = f"SegPol{self.nivel}"
         return resultado
+
 
 class SOn(Componente):
     def __init__(self):
-       self.nivel = 1
+        self.nivel = 1
+
     def maturidade(self, respostas: dict):
         resultado = f"SegPol{self.nivel}"
         return resultado
 
+
 class SInteg(Componente):
     def __init__(self):
-       self.nivel = 1
+        self.nivel = 1
+
     def maturidade(self, respostas: dict):
         resultado = f"SegPol{self.nivel}"
         return resultado
 
 # Monitoramento
+
+
 class MPlan(Componente):
     def __init__(self):
-       self.nivel = 1
+        self.nivel = 1
+
     def maturidade(self, respostas: dict):
         resultado = f"SegPol{self.nivel}"
         return resultado
-    
+
 
 class Coord(Componente):
     def __init__(self):
-       self.nivel = 1
+        self.nivel = 1
+
     def maturidade(self, respostas: dict):
         resultado = f"SegPol{self.nivel}"
         return resultado
@@ -723,7 +754,8 @@ class Coord(Componente):
 
 class Perc(Componente):
     def __init__(self):
-       self.nivel = 1
+        self.nivel = 1
+
     def maturidade(self, respostas: dict):
         resultado = f"SegPol{self.nivel}"
         return resultado
@@ -731,7 +763,8 @@ class Perc(Componente):
 
 class MTransp(Componente):
     def __init__(self):
-       self.nivel = 1
+        self.nivel = 1
+
     def maturidade(self, respostas: dict):
         resultado = f"SegPol{self.nivel}"
         return resultado
