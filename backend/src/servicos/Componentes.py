@@ -1688,8 +1688,6 @@ if "__main__" == __name__:
     #     print("DICT MUNICIPIO: ", nivel_mncps, "\n")
     #     del nivel
 
-
-
 # def calculo_mncp(respostas_municipios, pontuadores):
 #     for resposta_municipio in respostas_municipios:  # Resposta por municipio por capacidade
 #         print("RESPOSTA MUNICIPIO", resposta_municipio)
