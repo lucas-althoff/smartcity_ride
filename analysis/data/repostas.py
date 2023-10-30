@@ -27,6 +27,7 @@ class Resposta:
         self.df_variaveis.drop(cols, inplace=True, axis=1)
 
     def treat_reg_fields(self, var):
+        self.df_variaveis[var].fillna('', inplace=True)
         self.df_variaveis[var] = self.df_variaveis[var].apply(lambda x: x.split(','))
 
     def treat_vars(self):
