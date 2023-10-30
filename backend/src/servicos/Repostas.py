@@ -55,11 +55,13 @@ class Resposta:
             self.treat_order_fields(var)
         other_cols = [col for col in self.df_variaveis if col not in self.order_fields
                       and col not in ['Carimbo de data/hora', 'Observação:', 'E-mail', 'Município']]
-        for var in other_cols:
-            if self.df_variaveis[var].dtype == 'float64':
-                self.df_variaveis[var] = pd.NA
-            else:
-                self.treat_reg_fields(var)
+        # for var in other_cols:
+            # if self.df_variaveis[var].dtype == 'float64':
+                # self.df_variaveis[var] = pd.NA
+            # elif self.df_variaveis[var].dtype == 'int64':
+                # self.df_variaveis[var] = pd.NA
+            # else:
+            # self.treat_reg_fields(var)
         self.df_variaveis.rename(columns={
                                  'Carimbo de data/hora': 'atualizacao_dia', 'Município': 'municipio'}, inplace=True)
         self.df_variaveis.drop(['Observação:', 'E-mail'], axis=1, inplace=True)
