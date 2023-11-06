@@ -1,23 +1,25 @@
 import 'survey-core/defaultV2.min.css';
-import { Model } from 'survey-core';
+import { Model, FunctionFactory } from 'survey-core';
 import { Survey } from 'survey-react-ui';
 import "survey-core/defaultV2.min.css";
-import { json } from "./json";
+import {finalForm} from "./form/builder";
 
-const surveyJson = {
-    elements: [{
-        name: "Município",
-        title: "Preencha o Município:",
-        type: "text"
-    }, {
-        name: "LastName",
-        title: "Enter your last name:",
-        type: "text"
-    }]
-};
+// import { json } from "./json";
+
+function validateLength(params) {
+    const valArray = params[0];
+    if (valArray.isNull) {
+        return 0;
+    }
+    return valArray.length;
+}
+
+FunctionFactory.Instance.register("validateLength", validateLength);
+
+
 
 function SurveyComponent() {
-    const survey = new Model(json);
+    const survey = new Model(finalForm);
     survey.onComplete.add((sender, options) => {
         console.log(JSON.stringify(sender.data, null, 3));
     });
@@ -27,8 +29,6 @@ function SurveyComponent() {
 
 
 function App() {
-    const survey = new Model(surveyJson);
-
     return SurveyComponent();
 }
 
