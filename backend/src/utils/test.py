@@ -12,7 +12,7 @@ supabase = create_client(supabase_url=url, supabase_key=key)
 
 response1 = supabase.table('indicadores').select("*").execute()
 print(type(response1), response1)
-data, count = supabase.table('indicadores').insert({"id":64, "nome":"Estrutura de equipamentos culturais e esportivos", "dimensao": "Sociocultural", "topico": "Cultura"}).execute()
+data, count = supabase.table('indicadores').insert({"id": 64, "nome": "Estrutura de equipamentos culturais e esportivos", "dimensao": "Sociocultural", "topico": "Cultura"}).execute()
 print(data)
 response = supabase.table('indicadores').select("*").execute()
 print(type(response), response)

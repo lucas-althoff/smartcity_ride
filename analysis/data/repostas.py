@@ -53,6 +53,3 @@ class Resposta:
         df_aux = self.df_variaveis[self.df_variaveis.groupby('municipio').update_date.transform('max') == self.df_variaveis['update_date']][cols]
 
         return df_aux.to_dict(orient='records')
-
-
-
