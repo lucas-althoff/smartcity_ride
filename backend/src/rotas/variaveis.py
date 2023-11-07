@@ -7,6 +7,32 @@ from backend.src.utils import criar_saida
 
 rota_var = APIRouter()
 
+@rota_var.post(path="/survey/complete",
+              responses={200: {"message": "Ok", "content": ""},
+                         400: {"description": "not found"}},
+              tags=["Questionário"],
+              name="Receber Questionário Completo",
+              description="Receber questionário e registra na base de dados")
+async def survey_complete(input):
+    """
+    Função que posta resultados do questionario na base de dados supabase
+    :returns: 
+    :rtype:
+    """
+    print("Request payload: ", input)
+    input_json = json.loads(input.model_dump_json())
+    print("LODADED INPUT: ", input_json, type(input_json))
+    notas = literal_eval(input_json)
+    print("INPUT: ", notas, type(notas))
+    # supa_cliente = ObjetoSQL()
+    # nomes = []
+    # for i, var in enumerate(notas):
+    #     print(i, var)
+    #     supa_cliente.processar_query_insert(tabela='variaveis',
+    #                                         dados=var)
+    #     nomes.append(var['nome'])
+    return criar_saida(message="Notas recebidas no servidor", content=notas)
+
 
 @rota_var.get(path="/variaveis",
               responses={200: {"message": "Ok", "content": ""},

@@ -1,8 +1,6 @@
 import pandas as pd
 from decouple import config
 import json
-from ast import literal_eval
-
 
 class DadosIndicadores:
 
@@ -25,6 +23,8 @@ class DadosIndicadores:
 
 
 if __name__ == "__main__":
+    from ast import literal_eval
+
     ind = DadosIndicadores()
     print(ind)
     resultado = ind.reader()
