@@ -1,7 +1,7 @@
-export const inf_form =
+export const serv_form =
     {
-        "name": "capaciSERVe_servicos",
-        "title": "CapaciSERVe: Serviços",
+        "name": "capacidade_servicos",
+        "title": "Capacidade: Serviços",
         "elements":
             [
                 {
@@ -56,5 +56,63 @@ export const inf_form =
                         "title": "SERV03.m - Outros",
                     "visibleIf": "{SERV03} contains 'SERV03.m'"
                 },
+                {
+                    "type": "tagbox",
+                        "name": "SERV04",
+                        "title": "SERV04 - Neste município, as pessoas podem solicitar serviços públicos por meio de:",
+                        "choices": ["SERV04.a", "SERV04.b", "SERV04.c", "SERV04.d", "SERV04.e", "SERV04.f"]
+                },
+                {
+                    "type": "radiogroup",
+                    "name": "SERV05",
+                    "title": "SERV05 - A prefeitura oferece formas integradas de atendimento para os moradores do município?",
+                    "choices": ["SERV05.a", "SERV05.b", "SERV05.c"],
+                },
+                {
+                    "type": "tagbox",
+                    "name": "SERV05.1",
+                    "title": "SERV05.1 - Se sim, por quais canais de atendimento?",
+                    "choices": ["SERV05.1.a", "SERV05.1.b", "SERV05.1.c", "SERV05.1.d", "SERV05.1.e"],
+                    "visibleIf": "{SERV05} == 'SERV05.a'"
+                },
+                {
+                    "type": "text",
+                        "name": "SERV05.1.e",
+                        "title": "SERV05.1.e - Outros",
+                    "visibleIf": "{SERV05.1} == 'SERV05.1.e'"
+                },
+                {
+                    "type": "radiogroup",
+                    "name": "SERV06",
+                    "title": "SERV06 - Existem ações de gestão para oferta de serviços integrados para os moradores do município?",
+                    "choices": ["SERV06.a", "SERV06.b", "SERV06.c"],
+                },
+                {
+                    "type": "tagbox",
+                    "name": "SERV06.1",
+                    "title": "SERV06.1 - Se sim, quais iniciativas de gestão integrada de informações a prefeitura possui?",
+                    "choices": ["SERV06.1.a", "SERV06.1.b", "SERV06.1.c", "SERV06.1.d", "SERV06.1.e", "SERV06.1.f", "SERV06.1.g"],
+                    "visibleIf": "{SERV06} == 'SERV06.a'"
+                },
+                {
+                    "type": "text",
+                        "name": "SERV06.1.g",
+                        "title": "SERV06.g - Outros",
+                    "visibleIf": "{SERV06.1} == 'SERV06.1.g'"
+                },
+                {
+                    "type": "radiogroup",
+                    "name": "SERV07",
+                    "title": "SERV07 - A gestão municipal possui planos de ampliação da oferta de serviços para os moradores do município?",
+                    "choices": ["SERV07.a", "SERV07.b", "SERV07.c"],
+                },
+                {
+                    "type": "tagbox",
+                    "name": "SERV07.1",
+                    "title": "SERV07.1 - Se sim:",
+                    "choices": ["SERV07.1.a", "SERV07.1.b", "SERV07.1.c", "SERV07.1.d", "SERV07.1.e", "SERV07.1.f", "SERV07.1.g", "SERV07.1.h"],
+                    "visibleIf": "{SERV07} == 'SERV07.a'"
+                },
+
             ]
     }

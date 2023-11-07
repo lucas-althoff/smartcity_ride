@@ -1,4 +1,4 @@
-export const inf_form =
+export const dad_form =
     {
         "name": "capacidade_dados",
         "title": "Capacidade: Dados",
