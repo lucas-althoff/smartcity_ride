@@ -2,7 +2,7 @@ import json
 from ast import literal_eval
 from fastapi import APIRouter
 from backend.src.database import ObjetoSQL
-from backend.src.schemas import Variavel
+from backend.src.schemas import Variavel, SurveyData
 from backend.src.utils import criar_saida
 
 rota_var = APIRouter()
@@ -13,17 +13,18 @@ rota_var = APIRouter()
               tags=["Questionário"],
               name="Receber Questionário Completo",
               description="Receber questionário e registra na base de dados")
-async def survey_complete(input):
+async def survey_complete(input: SurveyData):
     """
     Função que posta resultados do questionario na base de dados supabase
     :returns: 
     :rtype:
     """
-    print("Request payload: ", input)
-    input_json = json.loads(input.model_dump_json())
-    print("LODADED INPUT: ", input_json, type(input_json))
-    notas = literal_eval(input_json)
-    print("INPUT: ", notas, type(notas))
+    try:
+        print("Request payload: ", input)
+        notas = input.dict()
+        print("Parsed input: ", notas)
+    except Exception as e:
+        return criar_saida(message="Erro", content=str(e))
     # supa_cliente = ObjetoSQL()
     # nomes = []
     # for i, var in enumerate(notas):
