@@ -24,6 +24,7 @@ async def survey_complete(input: SurveyData):
         notas = input.dict()
         print("Parsed input: ", notas)
     except Exception as e:
+        print("ERRO: ", e)
         return criar_saida(message="Erro", content=str(e))
     # supa_cliente = ObjetoSQL()
     # nomes = []

@@ -5,6 +5,9 @@ api = FastAPI(version='0.0.1', docs_url='/docs', redoc_url='/redoc', title="Smar
 
 origins = [
     "https://smartcity-survey.vercel.app/",
+    "https://smartcity-survey-git-main-lucas-althoffs-projects.vercel.app/",
+    "https://smartcity-survey-fack79bkj-lucas-althoffs-projects.vercel.app/",
+    "https://smartcity-survey-ioijizhvr-lucas-althoffs-projects.vercel.app/",
     "http://localhost:3000"
 ]
 
