@@ -2,8 +2,9 @@ import json
 from ast import literal_eval
 from fastapi import APIRouter
 from backend.src.database import ObjetoSQL
-from backend.src.schemas import Variavel, SurveyData
+from backend.src.schemas import Variavel, SurveyData, property_name_mapping
 from backend.src.utils import criar_saida
+from datetime import datetime
 
 rota_var = APIRouter()
 
@@ -13,18 +14,27 @@ rota_var = APIRouter()
               tags=["Questionário"],
               name="Receber Questionário Completo",
               description="Receber questionário e registra na base de dados")
-async def survey_complete(input: SurveyData):
+async def survey_complete(input: dict):
     """
     Função que posta resultados do questionario na base de dados supabase
     :returns: 
     :rtype:
     """
     try:
-        print("Request payload: ", input)
-        notas = input.dict()
-        print("Parsed input: ", notas)
+        print(f'[SC-RIDE] [{datetime.now()}] Request payload: ', input)
+
+        transformed_data = {}
+        for client_property, server_property in property_name_mapping.items():
+            if client_property in input:
+                transformed_data[server_property] = input[client_property]
+
+        print(f'[SC-RIDE] [{datetime.now()}] Transformed input: ', transformed_data)
+
+        survey_data = SurveyData(**transformed_data)
+
+        print(f'[SC-RIDE] [{datetime.now()}] Parsed input: ', survey_data.dict())
     except Exception as e:
-        print("ERRO: ", e)
+        print(f'[SC-RIDE] [{datetime.now()}] ERRO: ', e)
         return criar_saida(message="Erro", content=str(e))
     # supa_cliente = ObjetoSQL()
     # nomes = []
@@ -33,7 +43,7 @@ async def survey_complete(input: SurveyData):
     #     supa_cliente.processar_query_insert(tabela='variaveis',
     #                                         dados=var)
     #     nomes.append(var['nome'])
-    return criar_saida(message="Notas recebidas no servidor", content=notas)
+    return criar_saida(message="Notas recebidas no servidor", content=survey_data)
 
 
 @rota_var.get(path="/variaveis",

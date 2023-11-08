@@ -14,7 +14,12 @@ origins = [
 api.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_methods=["GET", "POST"],
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
-    allow_origins=origins
+    allow_origins=['*']
 )
+
+@api.options("/survey/complete")
+async def survey_complete_options():
+    # Handle preflight requests
+    return {"message": "Preflight request allowed"}

@@ -25,6 +25,25 @@ class Variavel(BaseModel):
     nome: str
 
 
+property_name_mapping = {
+    "EST03.1": "EST031",
+    "EST05.1": "EST051",
+    "EST05.1Extra": "EST051Extra",
+    "EST06.1": "EST061",
+    "EST06.1Extra": "EST061Extra",
+    "EST07.1": "EST071",
+    "EST07.1Extra": "EST071Extra",
+    "EST08.1": "EST081",
+    "EST08.1Extra": "EST081Extra",
+    "INF01.1": "INF011",
+    "INF04.1": "INF041",
+    "INF05.1": "INF051",
+    "SERV05.1": "SERV051",
+    "SERV06.1": "SERV061",
+    "SERV07.1": "SERV071",
+}
+
+
 class SurveyData(BaseModel):
     municipio: Optional[str]
     EST01: Optional[List[str]]
@@ -56,12 +75,13 @@ class SurveyData(BaseModel):
     INF3124: Optional[str]
     INF3127: Optional[str]
     INF01: Optional[str]
+    INF011: Optional[str]
     INF012: Optional[str]
     INF013: Optional[List[str]]
     INF014: Optional[str]
     INF02: Optional[List[str]]
     INF03: Optional[List[str]]
-    INF03l: Optional[str]
+    INF031: Optional[str]
     INF04: Optional[List[str]]
     INF041: Optional[List[str]]
     INF05: Optional[str]
@@ -84,7 +104,9 @@ class SurveyData(BaseModel):
     SERV05: Optional[str]
     SERV051: Optional[List[str]]
     SERV06: Optional[str]
+    SERV061: Optional[str]
     SERV07: Optional[str]
+    SERV071: Optional[str]
     MON01: Optional[str]
     MON02: Optional[List[str]]
     MON03: Optional[str]
