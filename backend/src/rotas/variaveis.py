@@ -8,43 +8,56 @@ from datetime import datetime
 
 rota_var = APIRouter()
 
-@rota_var.post(path="/survey/complete",
+@rota_var.post(path="/survey/validator",
               responses={200: {"message": "Ok", "content": ""},
                          400: {"description": "not found"}},
               tags=["Questionário"],
               name="Receber Questionário Completo",
-              description="Receber questionário e registra na base de dados")
-async def survey_complete(input: dict):
+              description="Receber questionário e valida sua estrutura")
+async def survey_validator(input: dict):
     """
     Função que posta resultados do questionario na base de dados supabase
     :returns: 
     :rtype:
     """
     try:
+        input = input["surveyData"]
         print(f'[SC-RIDE] [{datetime.now()}] Request payload: ', input)
-
-        transformed_data = {}
-        for client_property, server_property in property_name_mapping.items():
-            if client_property in input:
-                transformed_data[server_property] = input[client_property]
-
-        print(f'[SC-RIDE] [{datetime.now()}] Transformed input: ', transformed_data)
-
+        transformed_data = {property_name_mapping.get(key, key): value for key, value in input.items()}
         survey_data = SurveyData(**transformed_data)
-
-        print(f'[SC-RIDE] [{datetime.now()}] Parsed input: ', survey_data.dict())
     except Exception as e:
         print(f'[SC-RIDE] [{datetime.now()}] ERRO: ', e)
         return criar_saida(message="Erro", content=str(e))
-    # supa_cliente = ObjetoSQL()
-    # nomes = []
-    # for i, var in enumerate(notas):
-    #     print(i, var)
-    #     supa_cliente.processar_query_insert(tabela='variaveis',
-    #                                         dados=var)
-    #     nomes.append(var['nome'])
-    return criar_saida(message="Notas recebidas no servidor", content=survey_data)
+    return criar_saida(message="Notas recebidas no servidor", content=survey_data.model_dump())
 
+@rota_var.post(path="/survey/complete",
+              responses={200: {"message": "Ok", "content": ""},
+                         400: {"description": "not found"}},
+              tags=["Questionário"],
+              name="Receber Questionário Completo",
+              description="Receber questionário e registra na base de dados")
+async def survey_supabase(input: dict):
+    res = await survey_validator(input)
+    print(f'[SC-RIDE] [{datetime.now()}] Resultado validacao: ', res, type(res))
+    if res['message'] == 'Erro':
+        return criar_saida(message="Erro", content=str(res['content']))
+    try:
+        notas = res['content']
+        mun = notas['municipio']
+        del notas['municipio']
+        dados = {
+            'municipio': mun,
+            'atualizacao': datetime.now().isoformat(),
+            'notas': notas
+        }
+        print(f'[SC-RIDE] [{datetime.now()}] Dados preparados para inserção na base: ', dados)
+        supa_cliente = ObjetoSQL()
+        supa_cliente.processar_query_insert(tabela='survey', dados=dados)
+        print(f'[SC-RIDE] [{datetime.now()}] Notas inseridas na tabela survey da base de dados')
+    except Exception as e:
+        print(f'[SC-RIDE] [{datetime.now()}] ERRO: ', e)
+        return criar_saida(message="Erro", content=str(e))
+    return criar_saida(message="Notas inseridas na tabela survey da base de dados", content=notas)
 
 @rota_var.get(path="/variaveis",
               responses={200: {"message": "Ok", "content": ""},
