@@ -1,27 +1,3 @@
-from pydantic import BaseModel
-from typing import List, Dict, Optional
-
-
-class Resposta(BaseModel):
-    message: str
-    content: Optional[dict]
-
-
-class Indicador(BaseModel):
-    id: int
-    nome: str
-    dimensao: str
-    topico: str
-
-
-class Indicadores(BaseModel):
-    indicadores: str
-
-
-class Variavel(BaseModel):
-    id_variavel: str
-    municipio: str
-    nome: str
 
 property_name_mapping = {
     'EST01': 'EST01',
@@ -67,7 +43,7 @@ property_name_mapping = {
     'DAD03': 'DAD03',
     'DAD04': 'DAD04',
     'DAD05': 'DAD05',
-    'DAD051': 'DAD05',
+    'DAD05.1': 'DAD05',
     'DAD06': 'DAD06',
     'DAD07': 'DAD07',
     'DAD08': 'DAD08',
@@ -87,6 +63,37 @@ property_name_mapping = {
     'MON04': 'MON04',
     'MON05': 'MON05'
 }
+
+
+from pydantic import BaseModel
+from typing import List, Dict, Optional
+
+
+class Resposta(BaseModel):
+    message: str
+    content: Optional[dict]
+
+
+class Indicador(BaseModel):
+    id: int
+    nome: str
+    dimensao: str
+    topico: str
+
+
+class Indicadores(BaseModel):
+    indicadores: str
+
+
+class Variavel(BaseModel):
+    id_variavel: str
+    municipio: str
+    nome: str
+
+
+class PlatformData(BaseModel):
+    platform: str
+    values: List[str]
 
 
 class SurveyData(BaseModel):
@@ -154,3 +161,118 @@ class SurveyData(BaseModel):
     MON03: Optional[str] = None
     MON04: Optional[str] = None
     MON05: Optional[str] = None
+
+input_data = {
+   "municipio": "Água Fria de Goiás (GO)",
+   "EST06": "EST06.f",
+   "EST08": "EST08.g",
+   "EST09": [
+      "EST09.c"
+   ],
+   "EST01": [
+      "EST01.b",
+      "EST01.e",
+      "EST01.g",
+      "EST01.j",
+      "EST01.i"
+   ],
+   "INF4031": "Sim",
+   "INF05.4": "INF05.4.a",
+   "INF05": "INF05.a",
+   "INF05.5": "INF05.5.a",
+   "INF02": {
+      "INF02.a": "a",
+      "INF02.b": "a",
+      "INF02.c": "a",
+      "INF02.d": "a",
+      "INF02.e": "a",
+      "INF02.f": "a"
+   },
+   "DAD01": {
+      "DAD01.a": "a",
+      "DAD01.b": "a",
+      "DAD01.c": "a",
+      "DAD01.d": "a",
+      "DAD01.e": "b",
+      "DAD01.f": "b",
+      "DAD01.g": "b",
+      "DAD01.h": "b",
+      "DAD01.i": "b",
+      "DAD01.j": "b",
+      "DAD01.k": "a",
+      "DAD01.l": "a"
+   },
+   "SERV07": "SERV07.d",
+   "MON05": "MON05.c",
+   "SERV01": {
+      "SERV01.l": {
+         "Plataforma integrada": [
+            "b"
+         ]
+      },
+      "SERV01.a": {
+         "Multicanais": [
+            "c"
+         ]
+      },
+      "SERV01.b": {
+         "Plataforma integrada": [
+            "b"
+         ]
+      },
+      "SERV01.c": {
+         "Transacional": [
+            "d"
+         ]
+      },
+      "SERV01.d": {
+         "Multicanais": [
+            "c"
+         ]
+      },
+      "SERV01.e": {
+         "Transacional": [
+            "d"
+         ]
+      },
+      "SERV01.f": {
+         "Informacional": [
+            "e"
+         ]
+      },
+      "SERV01.g": {
+         "Não Digitalizado - digitalização planejada": [
+            "f"
+         ]
+      },
+      "SERV01.h": {
+         "Informacional": [
+            "e"
+         ]
+      },
+      "SERV01.i": {
+         "Não Digitalizado - digitalização planejada": [
+            "f"
+         ]
+      },
+      "SERV01.j": {
+         "Informacional": [
+            "e"
+         ]
+      },
+      "SERV01.k": {
+         "Não Digitalizado - digitalização planejada": [
+            "f"
+         ]
+      }
+   }
+}
+
+
+
+
+a = {property_name_mapping.get(key, key): value for key, value in input_data.items()}
+
+transformed_data = SurveyData(**a)
+
+print(transformed_data.dict())

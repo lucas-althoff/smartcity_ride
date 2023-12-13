@@ -1,7 +1,7 @@
 import json
 from ast import literal_eval
 from fastapi import APIRouter
-from backend.src.database import ObjetoSQL
+from backend.src.database import ObjetoSQL, save_data
 from backend.src.schemas import Variavel, SurveyData, property_name_mapping
 from backend.src.utils import criar_saida
 from datetime import datetime
@@ -40,6 +40,7 @@ async def survey_supabase(input: dict):
     res = await survey_validator(input)
     print(f'[SC-RIDE] [{datetime.now()}] Resultado validacao: ', res, type(res))
     if res['message'] == 'Erro':
+        save_data(input, table='survey_error')
         return criar_saida(message="Erro", content=str(res['content']))
     try:
         notas = res['content']
@@ -51,8 +52,7 @@ async def survey_supabase(input: dict):
             'notas': notas
         }
         print(f'[SC-RIDE] [{datetime.now()}] Dados preparados para inserção na base: ', dados)
-        supa_cliente = ObjetoSQL()
-        supa_cliente.processar_query_insert(tabela='survey', dados=dados)
+        save_data(dados, table='survey')
         print(f'[SC-RIDE] [{datetime.now()}] Notas inseridas na tabela survey da base de dados')
     except Exception as e:
         print(f'[SC-RIDE] [{datetime.now()}] ERRO: ', e)

@@ -80,3 +80,10 @@ class ObjetoSQL:
     def encerrar(self):
         """Metodo para encerrrar conexão com base de dados e limpar os objetos em memória"""
         del self.obj_connect
+
+
+## Funções utilizando objetos de manipulação de dados
+
+def save_data(data, table):
+    supa_cliente = ObjetoSQL()
+    supa_cliente.processar_query_insert(tabela=table, dados=data)
