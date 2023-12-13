@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for smartcity-ride-late-bush-6525-misty-moon-8935 on 2023-12-12T16:23:12-03:00
+# fly.toml app configuration file generated for e-ride on 2023-12-13T07:34:13-03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "smartcity-ride-late-bush-6525-misty-moon-8935"
+app = "e-ride"
 primary_region = "gru"
 
 [build]

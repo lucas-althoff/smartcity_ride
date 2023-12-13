@@ -1,7 +1,7 @@
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 
-api = FastAPI(version='0.0.1', docs_url='/docs', redoc_url='/redoc', title="Smart City - RIDE")
+api = FastAPI(version='0.0.1', docs_url='/docs', redoc_url='/redoc', title="API e-RIDE")
 
 origins = [
     "https://smartcity-survey.vercel.app/",
@@ -19,7 +19,9 @@ api.add_middleware(
     allow_origins=['*']
 )
 
-@api.options("/survey/complete")
+
+@api.options("/survey/complete",
+             include_in_schema=False)
 async def survey_complete_options():
     # Handle preflight requests
     return {"message": "Preflight request allowed"}

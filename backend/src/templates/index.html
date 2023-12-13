@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e-RIDE Maturidade</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="{{ url_for('static', path='index.css') }}">
+</head>
+
+<div class="header">
+    <div className="inner-header flex">
+        <div className="header-text">e-RIDE Maturidade</div>
+    </div>
+</div>
+
+<body>
+        <!-- <div class="lateral-bar">
+            
+        </div> -->
+
+        <div className="welcome-content flex">
+            <div className="welcome-text">
+                <img src="/static/logo192.png" alt="RIDE" class="logo" width="250" height="100">
+                <h2> Sistema de Apoio à Pesquisa - e-RIDE</h2>
+                <h2> Módulo: Maturidade</h2>
+                <p>
+                A plataforma e-RIDE tem como referência o modelo de Maturidade de Cidade Inteligente Sustentável MMCISB v2/2021.
+                </p>
+                Neste um sistema de diagnóstico de maturidade, ferramenta essencial para a execução da Ação 1 do Expo RIDE.<br>
+                Para maiores informacoes visite a documentação da API em
+                <div class="button-container">
+                    <button onclick=redirectDocs()>
+                        Documentação API
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div className="footer">
+            <p> ®EXPORIDE 2023 - Ação 1 </p>
+        </div>
+        <script>
+            const redirectDocs = () => {
+                    window.open('https://e-ride.fly.dev/docs/', '_blank');
+                };
+        </script>
+
+</body>
+</html>

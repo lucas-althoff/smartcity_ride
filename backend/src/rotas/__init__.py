@@ -5,7 +5,7 @@ from fastapi.templating import Jinja2Templates
 
 rota_raiz = APIRouter()
 templates_path = os.path.join(os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__))), 'utils')
+    os.path.dirname(os.path.abspath(__file__))), 'templates')
 templates = Jinja2Templates(directory=templates_path)
 
 
@@ -28,7 +28,6 @@ async def home(request: Request):
     :rtype: fastapi.Request
     """
     return templates.TemplateResponse("index.html", {"request": request})
-
 
 @rota_raiz.get("/healthcheck", include_in_schema=False)
 def read_root():

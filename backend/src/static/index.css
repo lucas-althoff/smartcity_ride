@@ -1,0 +1,131 @@
+body {
+    white-space: pre-line;
+    align-items: center;
+    text-align: center;
+}
+
+.header {
+    position: relative;
+    text-align: center;
+    background: linear-gradient(60deg, #c0750d 0%, #9f280e 100%);
+    color: white;
+    padding: 20px;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    fill: white;
+    margin-right: 15px;
+}
+
+.header-text {
+    font-family: 'Lato', 'Times New Roman', Times, serif;
+    font-weight: 300;
+    letter-spacing: 2px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the text horizontally */
+}
+
+.welcome-content {
+    font-family: 'Lato', 'Times New Roman', Times, serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 65vh;
+}
+
+.header-button {
+    margin-top: 10px;
+    margin-right: auto;
+    margin-left: 500px;
+}
+
+
+.lateral-bar button {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.lateral-bar button:hover::after {
+    content: attr(data-tooltip); /* Display the value of the 'data-tooltip' attribute as pop-up text */
+    position: absolute;
+    top: -30px; /* Adjust the distance from the button */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    white-space: nowrap; /* Prevent text from wrapping */
+    opacity: 0.9;
+    z-index: 1;
+}
+
+.lateral-bar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Start the lateral bar off-screen */
+    width: 150px;
+    height: 100%;
+    background-color: transparent; /* Set initial background color to transparent */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: left 0.3s ease; /* Add a transition effect for smooth animation */
+}
+
+.welcome-container.lateral-bar-open .lateral-bar {
+    left: 0; /* Move the lateral bar to the screen */
+    text-align: center;
+
+}
+
+.welcome-text {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+h2 {
+    font-size: 28px;
+}
+
+p {
+    font-size: 16px;
+    color: #333333;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center; /* Center the buttons horizontally */
+    margin-top: 20px; /* Add some space between the text and buttons */
+}
+
+button {
+    font-family: 'Lato', 'Times New Roman', Times, serif;
+    background-color: #fff;
+    color: #9f280e;
+    padding: 10px 20px;
+    border: 2px solid #e5e5e5; /* Add a border with your desired color */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: rgb(142, 143, 147);
+}
+
+.footer {
+    font-family: 'Lato', 'Times New Roman', Times, serif;
+    text-align: center;
+    padding: 20px;
+    background-color: #aeaeae;
+    color: white;
+    text-emphasis-color: #aeaeae;
+}

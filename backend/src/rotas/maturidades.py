@@ -17,7 +17,8 @@ rota_maturidade = APIRouter()
                                 400: {"description": "not found"}},
                      tags=["Maturidades"],
                      name="Gerar Maturidades",
-                     description="Gera Maturidades")
+                     description="Gera Maturidades",
+                     include_in_schema=False)
 async def get_maturidades():
     """
         Função que executa o tratamento dos formulários e calcula a maturidade.
@@ -69,7 +70,8 @@ async def get_maturidades():
                      tags=["Maturidades"],
                      name="Visualização das maturidades",
                      description="Renderizar tabela com níveis de maturidade calculado",
-                     response_class=HTMLResponse)
+                     response_class=HTMLResponse,
+                     include_in_schema=False)
 async def render_maturidades2():
     json_data = await get_maturidades()
     ultima_atualizacao = datetime.now() - timedelta(hours=3)
