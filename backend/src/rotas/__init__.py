@@ -27,7 +27,9 @@ async def home(request: Request):
     :returns: Página inicial
     :rtype: fastapi.Request
     """
-    return templates.TemplateResponse("index.html", {"request": request})
+    scheme = request.url.scheme
+    context = {"request": request, "scheme": scheme}
+    return templates.TemplateResponse("index.html", {"request": request, "context": context})
 
 @rota_raiz.get("/healthcheck", include_in_schema=False)
 def read_root():
