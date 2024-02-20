@@ -1,13 +1,15 @@
 from TIC import notas_planaltina, dict_indicators
-from backend.src.servicos.regrasNivelTIC import *
-from ticEstrutura import estrutura_meioambiente
+from regrasNivelTIC import *
+from ticEstrutura import estrutura_meioambiente, estrutura_economia, estrutura_sociocultural
 
 class Indicador:
-    def __init__(self, formula, name):
+    def __init__(self, formula, nome):
         self.formula = formula
-        self.func = 'maturidade_'+name.split('_')[1]
-        self.variables = dict_indicators[name]
-        print(f"Indicador [{name}] inicializado")
+        self.nome = nome
+        self.func = 'maturidade_'+nome.split('_')[1]
+        self.variables = dict_indicators[nome]
+        self.val = 0
+        print(f"Indicador [{nome}] inicializado")
 
     def calcular_indicador(self, data):
         values = {}
@@ -17,6 +19,9 @@ class Indicador:
                 values[var_name] = data[var_name]
             else:
                 # Sem dados, considerar indicador como zero
+                values[var_name] = 0
+            
+            if values[var_name] == 'nan':
                 values[var_name] = 0
 
         print("######  ", self.formula, values)
@@ -30,6 +35,11 @@ class Indicador:
             print(f"Error calculating the indicator: {e}")
             return None
 
+    def calcular_maturidade(self):
+        print("FUNCAO", self.func)
+        expressao = self.func+'('+ str(self.val)+')'
+        print(expressao)
+        print(eval(expressao))
 
 def media_ponderada(topico):
     total_sum_pesos = 0
@@ -48,23 +58,45 @@ def media_ponderada(topico):
 def computar_media_ponderada(estrutura):
     resultado = {}
     
-    for topico, dados_topico in estrutura["Topico"].items():
+    for topico, dados_topico in estrutura["Topicos"].items():
         average = media_ponderada(dados_topico)
         resultado[topico] = average * dados_topico["Peso"] / 100
     return resultado
 
 
+def computar_media_dimensoes(estrutura, media_topicos):
+    media_dimensoes = 0
+    for topico, media in media_topicos.items():
+        peso = estrutura["Topicos"][topico]['Peso']
+        # print("PESO",peso)
+        # print("MEDIA",media)
+        # print("RESULTADO",media_dimensoes)
+        media_dimensoes = media_dimensoes + peso*media
+
+    return media_dimensoes
+
+
 def popular_indicadores(estrutura, lista_indicadores):
-    for topico in estrutura["Topico"].values():
+    estrutura = estrutura.copy()
+    for topico in estrutura["Topicos"].values():
         for nome_indicador, dados_indicador in topico["Indicadores"].items():
-            matching_indicator = next((ind for ind in lista_indicadores if ind.name == nome_indicador), None)
-            if matching_indicator:
-                dados_indicador["val"] = matching_indicator.val
+
+            for ind in lista_indicadores:
+                # print("####### INDICADOR PROCURADO ", ind.nome)
+                if ind.nome == nome_indicador:
+                    matching_indicator = ind
+                    print("####### INDICADOR ENCONTRADO ", matching_indicator.nome)
+                    print("####### INDICADOR COMPLETO ", matching_indicator.__dict__)
+                    dados_indicador["val"] = matching_indicator.val
+                    print("####### VALOR ", matching_indicator.val)
+
+    
     print("Valores dos indicadores extraidos: ", estrutura)
     return estrutura
 
 
 if "__main__" == __name__:
+    import pandas as pd
 
     # ind_3025 = Indicador("GINI", "ind_3025")
     # ind_3087 = Indicador("PIB_PER_CAPITA", "ind_3087")
@@ -77,7 +109,7 @@ if "__main__" == __name__:
     ind_3027 = Indicador("({CO164}/{POP_TOT})*100", "ind_3027")
     ind_3122 = Indicador("{CS001}", "ind_3122")
     ind_3020 = Indicador("{EDOC_AGSN}/{EDOC_total}", "ind_3020")
-    ind_4041 = Indicador("({MHAB18}+{MHAB182}+{MHAB183}+{MHAB201}+{MHAB202}+{MHAB203}+{MHAB204}+{MHAB205}+{MHAB206}+{MHAB207}+{MHAB21}", "ind_4041")
+    ind_4041 = Indicador("({MHAB18}+{MHAB182}+{MHAB183}+{MHAB201}+{MHAB202}+{MHAB203}+{MHAB204}+{MHAB205}+{MHAB206}+{MHAB207}+{MHAB21})", "ind_4041")
     ind_4045 = Indicador("({MHAB191}+{MHAB192}+{MHAB193}+{MHAB194})", "ind_4045")
     ind_3049 = Indicador("({A1}*2)+{B1}+{C1}+{D1}", "ind_3049")
     ind_3076 = Indicador("{A2}+{B2}+{C2}+{D2}", "ind_3076")
@@ -114,7 +146,7 @@ if "__main__" == __name__:
     ind_4020 = Indicador("{MEDU131}+{MEDU132}+{MEDU133}+{MEDU134}", "ind_4020")
     ind_4034 = Indicador("{DIST_IDADE_SERIE}", "ind_4034")
     ind_4037 = Indicador("({IN_INTERNET}/{ESC_MUN})*100", "ind_4037")
-    ind_4048 = Indicador("(({QT_DESKTOP_ALUNO}+{QT_COMP_PORTATIL_ALUNO})/{QT_MATRÍCULAS})", "ind_4048")
+    ind_4048 = Indicador("(({QT_DESKTOP_ALUNO}+{QT_COMP_PORTATIL_ALUNO})/{QT_MATRICULAS})", "ind_4048")
     ind_3077 = Indicador("({MCUL3901}*2)+({MCUL3902}*2)+({MCUL3903}*2)+({MCUL3904}*2)+({MCUL3905}*2)+({MCUL3906}*2) +"
                         "({MCUL3907}*2)+{MCUL3908}+{MCUL3909}+{MCUL3910}+{MCUL3911}+{MCUL3912}+{MCUL3913}+{MCUL3914}+{MCUL3916}+"
                         "{MCUL3917}+{MCUL3918}+{MCUL3919}+({MCUL40}*2)", "ind_3077")
@@ -138,7 +170,7 @@ if "__main__" == __name__:
     ind_4044 = Indicador("{MASS261}+{MASS262}+{MASS263}+{MASS264}+{MASS265}+{MASS266} +"
                         "{MASS267}+{MASS268}+{MASS269}+{MASS610}+{MASS611}+{MASS612}+{MASS613}+{MASS614}", "ind_4044")
     ind_3103 = Indicador("(({A17}+{B17}+{F17})*2)+{C17}+(({D17}+{E17}+{G17})*3)", "ind_3103")
-    ind_3147 = Indicador("{A18}+{B18}+{C18}+{D18}+{E18}+{F18}", "ind_3147")
+    ind_3147 = Indicador("{A18}+{B18}+{C18}+{D18}+{E18}", "ind_3147")
     ind_3024 = Indicador("({ES005}/({AG010}-{AG019}))*100", "ind_3024")
     ind_3028 = Indicador("(({AG010}-{AG019})/{AG001}) * (1000000/365)", "ind_3028")
     ind_3042 = Indicador("{A19}+({B19}*3)+{C19}", "ind_3042")
@@ -226,18 +258,68 @@ if "__main__" == __name__:
         ind_3069,
         ind_3125]
 
-    res = []
-    for ind in lista_indicadores:
-        res = ind.calcular_indicador(notas_planaltina)
+    df = pd.read_csv('/home/lucas/Projetos/e-ride/Dados/dados_tic.csv')  
+    dados_lista = df.to_dict(orient='records')
+    
+    def save_dict(dict):
+        df = pd.DataFrame.from_dict(dict, orient="index")
+        df.to_csv("data.csv")
 
-    print("###########INDICADORES CALCULADOS##############")
+    # Extrair apenas os municipios para analise
+    dados_lista = dados_lista[6:7]
+    # dados_lista = dados_lista[7]
+    save_ind = False
 
-    estrutura_meioambiente_res = popular_indicadores(estrutura_meioambiente, lista_indicadores)
+    for dados in dados_lista:
+        print(dados)
+        print("###################### INICIANDO CALCULO PARA MUNCIPIO - ", dados['municipio'],"############################")
+        res = []
+        dict_ind = {'indicador':'resultado'}
+        for ind in lista_indicadores:
+            res = ind.calcular_indicador(dados)
+            print("######   Resultado: ", res)
+            print("######   Nome: ", ind.nome)
+            print("######   DICT: ", dict_ind)
+            dict_ind.update({ind.nome:res})
+            if save_ind:
+                save_dict(dict_ind)
+        break
 
+    print("###########INDICADORES CALCULADOS##############", len(lista_indicadores))
+
+    # estrutura_economia_res = popular_indicadores(estrutura_economia, lista_indicadores)
+    estrutura_sociocultural_res = popular_indicadores(estrutura_sociocultural, lista_indicadores)
+    # estrutura_meioambiente_res = popular_indicadores(estrutura_meioambiente, lista_indicadores)
+
+    # print(estrutura_meioambiente_res)
     print("###########RESULTADOS INDICADORES EXTRAIDOS##############")
 
-    media_resultado = computar_media_ponderada(estrutura_meioambiente_res)
-    print(media_resultado)
+    # Economia
+    # media_topicos = computar_media_ponderada(estrutura_economia_res)
+    # print(media_topicos)
+
+    # media_economia = computar_media_dimensoes(estrutura_economia_res, media_topicos)
+    # print(media_economia)
+
+    # Meio ambiente
+    
+    # media_topicos = computar_media_ponderada(estrutura_meioambiente_res)
+    # print(media_topicos)
+    # media_meioambiente = com
+    # putar_media_dimensoes(estrutura_meioambiente_res, media_topicos)
+    # print(media_meioambiente)
+
+    # Sociocultural
+
+    media_topicos = computar_media_ponderada(estrutura_sociocultural_res)
+    print("Media topicos =", media_topicos)
+
+    media_sociocultural = computar_media_dimensoes(estrutura_sociocultural_res, media_topicos)
+    print("Media dimensao = ", media_sociocultural)
+
+    print("###########Maturidade INDICADORES CALCULADA ##############")
+    # for ind in lista_indicadores:
+    #     res = ind.calcular_maturidade()
 
     print("###########Maturidade TOPICOS CALCULADA ##############")
 

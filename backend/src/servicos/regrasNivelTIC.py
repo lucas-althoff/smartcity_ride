@@ -56,15 +56,14 @@ def maturidade_3141(valor):
 
 
 # Dados Abertos
-def maturidade_3033(valor, maturidade_dado):
-    if valor <= 2 and maturidade_dado <= 5:
-        return maturidade_dado
-    if valor <= 2 and maturidade_dado >= 5:
+def maturidade_3033(valor, nivel_topico=1):
+    # Dados abertos da gestão municipal
+    if valor < 1:
         return 5
-    if valor >= 2 and maturidade_dado > 5:
-        return maturidade_dado
-    if valor >= 2 and maturidade_dado < 5:
-        return 5
+    if valor >= 1 and nivel_topico >= 5:
+        return nivel_topico
+    if valor >= 1 and nivel_topico < 5:
+        return 7
     return 1
 
 
@@ -105,7 +104,7 @@ def maturidade_4041(valor):
     return 1
 
 
-def maturidade_4045(valor, nivel_topico):
+def maturidade_4045(valor, nivel_topico=4):
     if valor == 4 or valor == 3:
         return 1
     if valor == 2:
@@ -163,7 +162,7 @@ def maturidade_3022(valor):
     return 1
 
 
-def maturidade_3040(valor, nivel_topico):
+def maturidade_3040(valor, nivel_topico=1):
     # Cobertura de acesso à banda larga móvel por tecnologias 3G e 4G
     if valor == 0:
         return 3
@@ -172,7 +171,7 @@ def maturidade_3040(valor, nivel_topico):
     return 1
 
 
-def maturidade_3041(valor, nivel_topico):
+def maturidade_3041(valor, nivel_topico=1):
     # Cobertura de fibra ótica
     if valor == 0:
         return 3
@@ -181,7 +180,7 @@ def maturidade_3041(valor, nivel_topico):
     return 1
 
 
-def maturidade_3134(valor, nivel_topico):
+def maturidade_3134(valor, nivel_topico=3):
     # Rede de tecnologia interligando os equipamentos e edifícios públicos
     if valor == 0:
         return 2
@@ -213,7 +212,7 @@ def maturidade_4035(valor):
     return 1
 
 
-def maturidade_4036(valor, nivel_topico=4):
+def maturidade_4036(valor):
     # Números de estações rádio base
     if valor < .2:
         return 1
@@ -494,7 +493,7 @@ def maturidade_4031(valor):
     return 1
 
 
-def maturidade_4046(valor, nivel_topico):
+def maturidade_4046(valor, nivel_topico=4):
     # Ciclomobilidade na cidade
     if valor < .001:
         return 1
@@ -552,7 +551,7 @@ def maturidade_3077(valor):
     return 1
 
 
-def maturidade_3107(valor, nivel_topico):
+def maturidade_3107(valor):
     # Proteção do patrimônio cultural material e imaterial
     if valor == 0:
         return 1
@@ -641,7 +640,7 @@ def maturidade_3011(valor):
     return 1
 
 
-def maturidade_3186(valor):
+def maturidade_3086(valor):
     # 3086- Índice de desenvolvimento da educação básica (IDEB) - anos finais
     if valor < .0349:
         return 1
@@ -698,7 +697,7 @@ def maturidade_4006(valor):
     return 1
 
 
-def maturidade_4020(valor, nivel_topico):
+def maturidade_4020(valor, nivel_topico=4):
     # 4020 Ações de educação para comunidades específicas
     if valor == 0:
         return 1
@@ -793,7 +792,7 @@ def maturidade_3007(valor):
     return 1
 
 
-def maturidade_4042(valor, nivel_topico):
+def maturidade_4042(valor, nivel_topico=5):
     # 4042 Vulnerabilidade a riscos e desastres naturais
     if valor == 6 or valor == 5:
         return 1
@@ -830,7 +829,7 @@ def maturidade_3039(valor):
     return 1
 
 
-def maturidade_4039(valor, nivel_topico):
+def maturidade_4039(valor, nivel_topico=5):
     # 4039 Cursos de capacitação tecnológica
     if valor == 0:
         return 1
@@ -1328,7 +1327,7 @@ lista_maturidade = [
     maturidade_3033,
     maturidade_3003,
     maturidade_3011,
-    maturidade_3186,
+    maturidade_3086,
     maturidade_3115,
     maturidade_4006,
     maturidade_4020,

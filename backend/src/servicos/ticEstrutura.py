@@ -26,7 +26,7 @@ estrutura_meioambiente = {
 
 estrutura_sociocultural = {"Nome": "Sociocultural",
                            "Peso": 63,
-                           "Topico":
+                           "Topicos":
                            {"Educacao": {"Peso": 23,
                                          "Indicadores": {"ind_3003": {"val": 0,
                                                                       "peso": 2},
@@ -156,5 +156,5 @@ estrutura_economia = {
                                                         "ind_4012": {"val": 0, "peso": 1}
                                                         }}
 
-     }
+    }
 }

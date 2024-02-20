@@ -268,10 +268,207 @@ input_data = {
    }
 }
 
+test_planaltina = {"municipio":"Planaltina (GO)","EST01":["EST01.d","EST01.c","EST01.e","EST01.i","EST01.a"],"EST02":["EST02.i","EST02.d","EST02.e","EST02.a","EST02.j"],"EST03":["EST03.a"],"EST04":["EST04.a","EST04.m"],"EST05":["EST05.a","EST05.e"],"EST051":["EST05.1.a","EST05.1.l"],"EST06":"EST06.a","EST07":["EST07.g"],"EST08":"EST08.g","EST09":["EST09.d"],"INF4005":"24,55 km² IBGE","INF4031":"Nao","INF4041":"Nao","INF4046":"Nao","INF3122":"Sim","INF3027":"98,53% aguasesaneamento.org.br","INF3077":"2","INF3110":"38,71% aguasesaneamento.org.br","INF3117":"95,71% aguasesaneamento.org.br","INF3124":"0","INF3127":"94,39% aguasesaneamento.org.br","INF01":"INF01.b","INF02":{"INF02.a":"a","INF02.b":"a","INF02.c":"c","INF02.d":"c","INF02.e":"c","INF02.f":"c"},"INF03":["INF03.a","INF03.c","INF03.d","INF03.e","INF03.f","INF03.g","INF03.h"],"INF04":["INF04.b","INF04.g"],"INF05":"INF05.b","DAD01":{"DAD01.a":"b","DAD01.b":"c","DAD01.c":"c","DAD01.d":"a","DAD01.e":"b","DAD01.f":"c","DAD01.g":"c","DAD01.h":"c","DAD01.i":"b","DAD01.j":"b","DAD01.k":"c","DAD01.l":"a"},"DAD02":"DAD02.e","DAD03":"DAD03.g","DAD04":["DAD04.e"],"DAD05":"DAD05.b","DAD06":"DAD06.a","DAD07":"DAD07.a","DAD08":"DAD08.b","SERV01":{"SERV01.a":{"Multicanais":["c"]},"SERV01.b":{"Informacional":["e"]},"SERV01.c":{"Não sabe":["h"]},"SERV01.d":{"Informacional":["e"]},"SERV01.e":{"Não sabe":["h"]},"SERV01.f":{"Informacional":["e"]},"SERV01.g":{"Não sabe":["h"]},"SERV01.h":{"Não sabe":["h"]},"SERV01.i":{"Transacional":["d"]},"SERV01.j":{"Multicanais":["c"]},"SERV01.k":{"Não sabe":["h"]},"SERV01.l":{"Não sabe":["h"]}},"SERV03":["SERV03.i","SERV03.j"],"SERV04":["SERV04.a","SERV04.b","SERV04.c","SERV04.e"],"SERV05":"SERV05.b","SERV06":"SERV06.b","SERV07":"SERV07.c","MON01":"MON01.a","MON02":["MON02.m"],"MON03":"MON03.b","MON04":"MON04.e","MON05":"MON05.a"}
 
 
+test_planaltina2 = {
+    "municipio": "Planaltina (GO)",
+    "EST01": [
+      "EST01.d",
+      "EST01.c",
+      "EST01.e",
+      "EST01.i",
+      "EST01.a"
+    ],
+    "EST02": [
+      "EST02.i",
+      "EST02.d",
+      "EST02.e",
+      "EST02.a",
+      "EST02.j"
+    ],
+    "EST03": [
+      "EST03.a"
+    ],
+    "EST04": [
+      "EST04.a",
+      "EST04.m"
+    ],
+    "EST05": [
+      "EST05.a",
+      "EST05.e"
+    ],
+    "EST051": [
+      "EST05.1.a",
+      "EST05.1.l"
+    ],
+    "EST06": "EST06.a",
+    "EST061": None,
+    "EST07": [
+      "EST07.g"
+    ],
+    "EST071": None,
+    "EST08": "EST08.g",
+    "EST09": [
+      "EST09.d"
+    ],
+    "INF4005": "24,55 km² IBGE",
+    "INF4031": "Nao",
+    "INF4041": "Nao",
+    "INF4046": "Nao",
+    "INF3122": "Sim",
+    "INF3027": "98,53% aguasesaneamento.org.br",
+    "INF3077": "2",
+    "INF3110": "38,71% aguasesaneamento.org.br",
+    "INF3117": "95,71% aguasesaneamento.org.br",
+    "INF3124": "0",
+    "INF3127": "94,39% aguasesaneamento.org.br",
+    "INF01": "INF01.b",
+    "INF011": None,
+    "INF012": None,
+    "INF013": None,
+    "INF014": None,
+    "INF02": {
+      "INF02.a": "a",
+      "INF02.b": "a",
+      "INF02.c": "c",
+      "INF02.d": "c",
+      "INF02.e": "c",
+      "INF02.f": "c"
+    },
+    "INF03": [
+      "INF03.a",
+      "INF03.c",
+      "INF03.d",
+      "INF03.e",
+      "INF03.f",
+      "INF03.g",
+      "INF03.h"
+    ],
+    "INF031": None,
+    "INF04": [
+      "INF04.b",
+      "INF04.g"
+    ],
+    "INF041": None,
+    "INF05": "INF05.b",
+    "INF051": None,
+    "INF052": None,
+    "INF053": None,
+    "INF054": None,
+    "DAD01": {
+      "DAD01.a": "b",
+      "DAD01.b": "c",
+      "DAD01.c": "c",
+      "DAD01.d": "a",
+      "DAD01.e": "b",
+      "DAD01.f": "c",
+      "DAD01.g": "c",
+      "DAD01.h": "c",
+      "DAD01.i": "b",
+      "DAD01.j": "b",
+      "DAD01.k": "c",
+      "DAD01.l": "a"
+    },
+    "DAD02": "DAD02.e",
+    "DAD03": "DAD03.g",
+    "DAD04": [
+      "DAD04.e"
+    ],
+    "DAD05": None,
+    "DAD051": None,
+    "DAD06": "DAD06.a",
+    "DAD07": "DAD07.a",
+    "DAD08": "DAD08.b",
+    "DAD09": None,
+    "SERV01": {
+      "SERV01.a": {
+        "Multicanais": [
+          "c"
+        ]
+      },
+      "SERV01.b": {
+        "Informacional": [
+          "e"
+        ]
+      },
+      "SERV01.c": {
+        "Não sabe": [
+          "h"
+        ]
+      },
+      "SERV01.d": {
+        "Informacional": [
+          "e"
+        ]
+      },
+      "SERV01.e": {
+        "Não sabe": [
+          "h"
+        ]
+      },
+      "SERV01.f": {
+        "Informacional": [
+          "e"
+        ]
+      },
+      "SERV01.g": {
+        "Não sabe": [
+          "h"
+        ]
+      },
+      "SERV01.h": {
+        "Não sabe": [
+          "h"
+        ]
+      },
+      "SERV01.i": {
+        "Transacional": [
+          "d"
+        ]
+      },
+      "SERV01.j": {
+        "Multicanais": [
+          "c"
+        ]
+      },
+      "SERV01.k": {
+        "Não sabe": [
+          "h"
+        ]
+      },
+      "SERV01.l": {
+        "Não sabe": [
+          "h"
+        ]
+      }
+    },
+    "SERV03": [
+      "SERV03.i",
+      "SERV03.j"
+    ],
+    "SERV04": [
+      "SERV04.a",
+      "SERV04.b",
+      "SERV04.c",
+      "SERV04.e"
+    ],
+    "SERV05": "SERV05.b",
+    "SERV051": None,
+    "SERV06": "SERV06.b",
+    "SERV061": None,
+    "SERV07": "SERV07.c",
+    "SERV071": None,
+    "MON01": "MON01.a",
+    "MON02": [
+      "MON02.m"
+    ],
+    "MON03": "MON03.b",
+    "MON04": "MON04.e",
+    "MON05": "MON05.a"
+  }
 
-a = {property_name_mapping.get(key, key): value for key, value in input_data.items()}
+a = {property_name_mapping.get(key, key): value for key, value in test_planaltina2.items()}
 
 transformed_data = SurveyData(**a)
 

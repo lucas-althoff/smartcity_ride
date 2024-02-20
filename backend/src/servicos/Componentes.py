@@ -1,3 +1,5 @@
+import pandas as pd
+
 
 def soma(respostas: dict, universo: dict):
     soma = 0
@@ -403,32 +405,39 @@ class ITPlan():
                     return True
                 return False
             case 2:
-                if any([v in respostas["INF05.1"] for v in self.qualificadores["ITPlan2"][0]]):  # Critério qualificadores
+                if isinstance(respostas["INF05.1"], (list, tuple)) and \
+                    any([v in respostas["INF05.1"] for v in self.qualificadores["ITPlan2"][0]]):  # Critério qualificadores
                     return True
                 return False
             case 3:
-                if all([v in respostas["INF05.1"] for v in self.fixadores["ITPlan3"]]):  # Critério fixador
+                if isinstance(respostas["INF05.1"], (list, tuple)) and \
+                    all([v in respostas["INF05.1"] for v in self.fixadores["ITPlan3"]]):  # Critério fixador
                     return True
                 return False
             case 4:
-                if any([v in respostas["INF05"] for v in self.fixadores["ITPlan4"]]) and \
-                        any([v in respostas["INF05.2"] for v in self.fixadores["ITPlan4"]]):  # Critério fixadores
+                if isinstance(respostas["INF05.2"], (list, tuple)) and \
+                    any([v in respostas["INF05"] for v in self.fixadores["ITPlan4"]]) and \
+                    any([v in respostas["INF05.2"] for v in self.fixadores["ITPlan4"]]):  # Critério fixadores
                     return True
                 return False
             case 5:
-                if any([v in respostas["INF05.2"] for v in self.fixadores["ITPlan5"]]) and \
-                        any([v in respostas["INF05.3"] for v in self.fixadores["ITPlan5"]]) and \
-                        any([v in respostas["INF05.4"] for v in self.fixadores["ITPlan5"]]):  # Critério fixadores
+                if isinstance(respostas["INF05.2"], (list, tuple)) and \
+                    any([v in respostas["INF05.2"] for v in self.fixadores["ITPlan5"]]) and \
+                    any([v in respostas["INF05.3"] for v in self.fixadores["ITPlan5"]]) and \
+                    any([v in respostas["INF05.4"] for v in self.fixadores["ITPlan5"]]):  # Critério fixadores
                     return True
                 return False
             case 6:
-                if any([v in respostas["INF05.3"] for v in self.fixadores["ITPlan6"]]) and \
-                        any([v in respostas["INF05.4"] for v in self.fixadores["ITPlan6"]]) and \
-                        any([v in respostas["INF05.5"] for v in self.fixadores["ITPlan6"]]):  # Critério fixadores
+                if isinstance(respostas["INF05.3"], (list, tuple)) and \
+                    any([v in respostas["INF05.3"] for v in self.fixadores["ITPlan6"]]) and \
+                    any([v in respostas["INF05.4"] for v in self.fixadores["ITPlan6"]]) and \
+                    any([v in respostas["INF05.5"] for v in self.fixadores["ITPlan6"]]):  # Critério fixadores
                     return True
                 return False
             case 7:
-                if all([v in respostas["INF05.5"] for v in self.fixadores["ITPlan7"]]):  # Critério fixador
+                if pd.isna(respostas.get("INF05.5")) and \
+                        isinstance(respostas["INF05.5"], (list, tuple)) and \
+                        all([v in respostas["INF05.5"] for v in self.fixadores["ITPlan7"]]):  # Critério fixador
                     return True
                 return False
 
@@ -770,7 +779,7 @@ class HwSw():
 class GovTI():
     def __init__(self):
         self.componente = "GovTI"
-        self.nivel_inicial = "4"
+        self.nivel_inicial = "1"
         self.fixadores = {"GovTI4": ["INF01.4.a"],
                           "GovTI5": ["INF01.4.b"],
                           "GovTI6": ["INF01.4.c"],
@@ -780,19 +789,23 @@ class GovTI():
     def verificador_interno(self, respostas, nivel):
         match nivel:
             case 4:
-                if self.fixadores["GovTI4"][0] in respostas["INF01.4"]:  # Critério fixador
+                if isinstance(respostas["INF01.4"], (list, tuple)) and \
+                    self.fixadores["GovTI4"][0] in respostas["INF01.4"]:  # Critério fixador
                     return True
                 return False
             case 5:
-                if self.fixadores["GovTI5"][0] in respostas["INF01.4"]:  # Critério fixador
+                if isinstance(respostas["INF01.4"], (list, tuple)) and \
+                    self.fixadores["GovTI5"][0] in respostas["INF01.4"]:  # Critério fixador
                     return True
                 return False
             case 6:
-                if self.fixadores["GovTI6"][0] in respostas["INF01.4"]:  # Critério fixador
+                if isinstance(respostas["INF01.4"], (list, tuple)) and \
+                    self.fixadores["GovTI6"][0] in respostas["INF01.4"]:  # Critério fixador
                     return True
                 return False
             case 7:
-                if self.fixadores["GovTI7"][0] in respostas["INF01.4"]:  # Critério fixador
+                if isinstance(respostas["INF01.4"], (list, tuple)) and \
+                    self.fixadores["GovTI7"][0] in respostas["INF01.4"]:  # Critério fixador
                     return True
                 return False
 
@@ -1019,7 +1032,7 @@ class DTransp():
 class DInteg():
     def __init__(self):
         self.componente = "DInteg"
-        self.nivel_inicial = "4"
+        self.nivel_inicial = "1"
 
         self.fixadores = {f"{self.componente}4": ["DAD02.d"],
                           f"{self.componente}5": ["DAD02.c"],
@@ -1251,22 +1264,34 @@ class SOn():
                                f"{self.componente}6": {'cq1': cq16, 'cq2': cq2, 'cq3': cq3}}
 
     def verificador_interno(self, respostas, nivel):
+        if pd.isna(respostas["SERV01"]):
+            return False 
         match nivel:
-            case 1:
+            case 1:   
                 c1 = sum([v in respostas["SERV01"] for v in self.qualificadores[f"{self.componente}1"]["cq1"]]) >= 3
                 c2 = not any([v in respostas["SERV02"] for v in self.qualificadores[f"{self.componente}1"]["cq2"]])
                 c3 = not any([v in respostas["SERV03"] for v in self.qualificadores[f"{self.componente}1"]["cq3"]])
                 c4 = "SERV04.a" in respostas["SERV04"]
                 c5 = "SERV05.b" in respostas["SERV05"] and "SERV05.c" in respostas["SERV05"]
+                # print("C1 = ", c1, sum([v in respostas["SERV01"] for v in self.qualificadores[f"{self.componente}1"]["cq1"]]))
+                # print("C2 = ", c2)
+                # print("C3 = ", c3)
+                # print("C4 = ", c4)
+                # print("C5 = ", c5)
                 if c1 and c2 and c3 and c4 and c5:  # Critério triplo qualificadores
                     return True
                 return False
             case 2:
                 c1 = sum([v in respostas["SERV01"] for v in self.qualificadores[f"{self.componente}1"]["cq1"]]) >= 3
-                c2 = sum([v in respostas["SERV02"] for v in self.qualificadores[f"{self.componente}1"]["cq2"]]) >= 1
-                c3 = "SERV03.e" in respostas["SERV03"] and "SERV03.f" in respostas["SERV03"]
+                c2 = any([v in respostas["SERV02"] for v in self.qualificadores[f"{self.componente}1"]["cq2"]])
+                c3 = "SERV03.e" in respostas["SERV03"] or "SERV03.f" in respostas["SERV03"]
                 c4 = "SERV04.a" in respostas["SERV04"] and "SERV04.b" in respostas["SERV04"]
                 c5 = "SERV05.a" in respostas["SERV05"] and "SERV05.1.a" in respostas["SERV05.1"]
+                print("C1 = ", c1, sum([v in respostas["SERV01"] for v in self.qualificadores[f"{self.componente}1"]["cq1"]]))
+                print("C2 = ", c2)
+                print("C3 = ", c3)
+                print("C4 = ", c4)
+                print("C5 = ", c5)
                 if c1 and c2 and c3 and c4 and c5:  # Critério triplo qualificadores
                     return True
                 return False
@@ -1382,6 +1407,8 @@ class SInteg():
                     return True
                 return False
             case 6:
+                if respostas["SERV01"]:
+                    return False                
                 c1 = sum([v in respostas["SERV01"] for v in self.qualificadores[f"{self.componente}6"]]) >= 2
                 c2 = "SERV06.a" in respostas["SERV06"]
                 c3 = "SERV06.1.b" in respostas["SERV06"]
@@ -1389,6 +1416,8 @@ class SInteg():
                     return True
                 return False
             case 7:
+                if respostas["SERV01"]:
+                    return False  
                 c1 = sum([v in respostas["SERV01"] for v in self.qualificadores[f"{self.componente}6"]]) >= 2
                 c2 = "SERV06.a" in respostas["SERV06"]
                 c3 = "SERV06.1.a" in respostas["SERV06"]
@@ -1511,7 +1540,7 @@ class Coord():
 class Perc():
     def __init__(self):
         self.componente = "Perc"
-        self.nivel_inicial = "4"
+        self.nivel_inicial = "1"
         self.fixadores = {f"{self.componente}4": ["MON05.b"],
                           f"{self.componente}5": ["MON05.c"],
                           f"{self.componente}6": ["MON05.d"],
@@ -1547,7 +1576,7 @@ class Perc():
 class MTransp():
     def __init__(self):
         self.componente = "MTransp"
-        self.nivel_inicial = "4"
+        self.nivel_inicial = "1"
         self.fixadores = {f"{self.componente}4": ["MON04.d"],
                           f"{self.componente}5": ["MON04.c"],
                           f"{self.componente}6": ["MON04.b"],
@@ -1594,7 +1623,6 @@ if "__main__" == __name__:
     from Repostas import Resposta
     from Maturidade import Nivel
 
-     
     # notas_est = extrator.get_capacidade('EST')
     # notas_inf = extrator.get_capacidade('INF')
     # notas_dad = extrator.get_capacidade('DAD')
@@ -1605,19 +1633,19 @@ if "__main__" == __name__:
     extrator = Resposta()
 
     est = [EPlan(), GovCol(), GovTec(), SegPol(), Vis()]
-    inf = [IUPlan(), AQua(), ITPlan(), Inst(), HwSw(), GovTI()] # Completo com indices
+    inf = [IUPlan(), AQua(), ITPlan(), Inst(), HwSw(), GovTI()]  # Completo com indices
     # inf = [ITPlan(), Inst(), GovTI()]
     dad = [DPlan(), Digi(), DTransp(), DInteg()]
-    serv = [SPlan(), SUrb(), SOn(), SInteg()] # Completo com indices
+    serv = [SPlan(), SUrb(), SOn(), SInteg()]  # Completo com indices
     # serv = [SPlan(), SOn(), SInteg()]
-    mon = [MPlan(), Coord(), Perc(), MTransp()] 
-    
+    mon = [MPlan(), Coord(), Perc(), MTransp()]
+
     pontuadores_comps = {"EST": est,
                          "INF": inf,
                          "DAD": dad,
                          "SERV": serv,
                          "MON": mon}
-    
+
     # nivel = {"EST": {},
     #     "INF": {},
     #     "DAD": {},
@@ -1646,7 +1674,7 @@ if "__main__" == __name__:
             nivel_cap = pontuador_cap.definir_nivel(niveis=nivel)
             if verbose:
                 print("NIVEL COMPONENTES: ", nivel)
-                print("NIVEL CAPACIDADE: ", nivel_cap , "\n")
+                print("NIVEL CAPACIDADE: ", nivel_cap, "\n")
 
             if nivel["municipio"] in resultado_mncp:
                 resultado_mncp[resposta_municipio["municipio"]].append({"capacidade": nome_cap,
@@ -1654,12 +1682,11 @@ if "__main__" == __name__:
                                                                         "componentes": nivel[nome_cap]})
             else:  # Inicializa o resultado
                 resultado_mncp.update({resposta_municipio["municipio"]: [{"capacidade": nome_cap,
-                                                                        "maturidade": nivel_cap,
-                                                                        "componentes": nivel[nome_cap]}]})
+                                                                          "maturidade": nivel_cap,
+                                                                          "componentes": nivel[nome_cap]}]})
             nivel = {nome_cap: {}}
     import json
     print("NIVEL MUNICIPIOS", json.dumps(resultado_mncp, ensure_ascii=False))
-
 
     # respostas_mncp = get_resp_mncp(caps=caps, idx_mncp=1)
     # for nome_cap, pontuadores in pontuadores_comps.items():  # Coletando o pontuador
@@ -1675,7 +1702,7 @@ if "__main__" == __name__:
     #         nivel["municipio"] = resposta_municipio["municipio"]
     #         print(f"###### Município - {resposta_municipio['municipio']} #######")
     #         for pontuador in pontuadores:
-    #             nivel[nome_cap]["componentes"][pontuador.componente] = pontuador.maturidade(resposta_municipio) 
+    #             nivel[nome_cap]["componentes"][pontuador.componente] = pontuador.maturidade(resposta_municipio)
     #         nivel_cap = pontuador_cap.definir_nivel(niveis=nivel)
     #         nivel[nome_cap]["maturidade"] = nivel_cap
     #         nivel_mncps.append(nivel)
@@ -1693,7 +1720,7 @@ if "__main__" == __name__:
 #         print("RESPOSTA MUNICIPIO", resposta_municipio)
 #         nivel["municipio"] = resposta_municipio["municipio"]
 #         for pontuador in pontuadores:
-#             nivel[nome_cap][pontuador.componente] = pontuador.maturidade(resposta_municipio) 
+#             nivel[nome_cap][pontuador.componente] = pontuador.maturidade(resposta_municipio)
 #         print("NIVEL: \n", nivel)
 #     return nivel
 
