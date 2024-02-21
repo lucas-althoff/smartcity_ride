@@ -1,6 +1,7 @@
 from TIC import notas_planaltina, dict_indicators
 from regrasNivelTIC import *
 from ticEstrutura import estrutura_meioambiente, estrutura_economia, estrutura_sociocultural
+import math
 
 class Indicador:
     def __init__(self, formula, nome):
@@ -21,15 +22,25 @@ class Indicador:
                 # Sem dados, considerar indicador como zero
                 values[var_name] = 0
             
-            if values[var_name] == 'nan':
+            if math.isnan(values[var_name]):
                 values[var_name] = 0
+ 
+        print("######  ", self.nome, self.formula, values)
 
-        print("######  ", self.formula, values)
+        # Casos de denominador contendo valor igual a zero
+        if self.nome == "ind_3086":
+            if values['P'] == 0:
+                resultado = 0
+                self.val = resultado
+                print("######  resultado: ", resultado)
+                return resultado    
+        
         substituted_formula = self.formula.format(**values)
 
         try:
             resultado = eval(substituted_formula)
             self.val = resultado
+            print("######  ", values, resultado)
             return resultado
         except Exception as e:
             print(f"Error calculating the indicator: {e}")
@@ -40,6 +51,7 @@ class Indicador:
         expressao = self.func+'('+ str(self.val)+')'
         print(expressao)
         print(eval(expressao))
+
 
 def media_ponderada(topico):
     total_sum_pesos = 0
@@ -85,10 +97,10 @@ def popular_indicadores(estrutura, lista_indicadores):
                 # print("####### INDICADOR PROCURADO ", ind.nome)
                 if ind.nome == nome_indicador:
                     matching_indicator = ind
-                    print("####### INDICADOR ENCONTRADO ", matching_indicator.nome)
-                    print("####### INDICADOR COMPLETO ", matching_indicator.__dict__)
+                    # print("####### INDICADOR ENCONTRADO ", matching_indicator.nome)
+                    # print("####### INDICADOR COMPLETO ", matching_indicator.__dict__)
                     dados_indicador["val"] = matching_indicator.val
-                    print("####### VALOR ", matching_indicator.val)
+                    # print("####### VALOR ", matching_indicator.val)
 
     
     print("Valores dos indicadores extraidos: ", estrutura)
@@ -109,14 +121,14 @@ if "__main__" == __name__:
     ind_3027 = Indicador("({CO164}/{POP_TOT})*100", "ind_3027")
     ind_3122 = Indicador("{CS001}", "ind_3122")
     ind_3020 = Indicador("{EDOC_AGSN}/{EDOC_total}", "ind_3020")
-    ind_4041 = Indicador("({MHAB18}+{MHAB182}+{MHAB183}+{MHAB201}+{MHAB202}+{MHAB203}+{MHAB204}+{MHAB205}+{MHAB206}+{MHAB207}+{MHAB21})", "ind_4041")
-    ind_4045 = Indicador("({MHAB191}+{MHAB192}+{MHAB193}+{MHAB194})", "ind_4045")
+    ind_4041 = Indicador("{Mhab18}+{Mhab182}+{Mhab183}+{Mhab201}+{Mhab202}+{Mhab203}+{Mhab204}+{Mhab205}+{Mhab206}+{Mhab207}+{Mhab21}", "ind_4041")
+    ind_4045 = Indicador("({Mhab191}+{Mhab192}+{Mhab193}+{Mhab194})", "ind_4045")
     ind_3049 = Indicador("({A1}*2)+{B1}+{C1}+{D1}", "ind_3049")
     ind_3076 = Indicador("{A2}+{B2}+{C2}+{D2}", "ind_3076")
-    ind_3124 = Indicador("{MTRA181}+({MTRA182}*3)+({MTRA183}*2)+({MTRA184}*2)+({MTRA185}*3)+{MTRA186}+{MTRA187}+({MTRA19}*3)+{MTRA23}", "ind_3124")
+    ind_3124 = Indicador("{Mtra181}+({Mtra182}*3)+({Mtra183}*2)+({Mtra184}*2)+({Mtra185}*3)+{Mtra186}+{Mtra187}+({Mtra19}*3)+{Mtra23}", "ind_3124")
     ind_4011 = Indicador("({A3}*3)+{B3}+{C3}+{D3}+({E3}*2)+({F3}*2)", "ind_4011")
-    ind_4031 = Indicador("{MTRA086}+{MTRA21}+{MTRA221}+{MTRA222}+{MTRA223}", "ind_4031")
-    ind_4046 = Indicador("{MTRA085}+({MTRA24}*2)+{MTRA25}", "ind_4046")
+    ind_4031 = Indicador("{Mtra086}+{Mtra21}+{Mtra221}+{Mtra222}+{Mtra223}", "ind_4031")
+    ind_4046 = Indicador("{Mtra085}+({Mtra24}*2)+{Mtra25}", "ind_4046")
     ind_4005 = Indicador("({existe_pavimentacao}/{total_pavimentacao})*100", "ind_4005")
     ind_3021 = Indicador("{Acesso_SCM}", "ind_3021")
     ind_3022 = Indicador("({TOT_ACESSOS}/{POP_TOT})*100", "ind_3022")
@@ -141,16 +153,16 @@ if "__main__" == __name__:
                         ({IN_INTERNET_APRENDIZAGEM_ALUNOS}/{ESC_MUN})", "ind_3003")
     ind_3011 = Indicador("{TX_ANALF}", "ind_3011")
     ind_3086 = Indicador("{N}/{P}", "ind_3086")
-    ind_3115 = Indicador("{QT_VAGA_TOTAL}/{POP_TOT}", "ind_3115")
+    ind_3115 = Indicador("100000*{QT_VAGA_TOTAL}/{POP_TOT}", "ind_3115")
     ind_4006 = Indicador("{A8}+{B8}+{C8}+{D8}+{E8}+{F8}+{G8}", "ind_4006")
-    ind_4020 = Indicador("{MEDU131}+{MEDU132}+{MEDU133}+{MEDU134}", "ind_4020")
+    ind_4020 = Indicador("{Medu131}+{Medu132}+{Medu133}+{Medu134}", "ind_4020")
     ind_4034 = Indicador("{DIST_IDADE_SERIE}", "ind_4034")
     ind_4037 = Indicador("({IN_INTERNET}/{ESC_MUN})*100", "ind_4037")
     ind_4048 = Indicador("(({QT_DESKTOP_ALUNO}+{QT_COMP_PORTATIL_ALUNO})/{QT_MATRICULAS})", "ind_4048")
-    ind_3077 = Indicador("({MCUL3901}*2)+({MCUL3902}*2)+({MCUL3903}*2)+({MCUL3904}*2)+({MCUL3905}*2)+({MCUL3906}*2) +"
-                        "({MCUL3907}*2)+{MCUL3908}+{MCUL3909}+{MCUL3910}+{MCUL3911}+{MCUL3912}+{MCUL3913}+{MCUL3914}+{MCUL3916}+"
-                        "{MCUL3917}+{MCUL3918}+{MCUL3919}+({MCUL40}*2)", "ind_3077")
-    ind_3107 = Indicador("({MCUL15}*3)+{MCUL161}*1+{MCUL162}*1+({MCUL18}*2)", "ind_3107")
+    ind_3077 = Indicador("({Mcul3901}*2)+({Mcul3902}*2)+({Mcul3903}*2)+({Mcul3904}*2)+({Mcul3905}*2)+({Mcul3906}*2) +"
+                        "({Mcul3907}*2)+{Mcul3908}+{Mcul3909}+{Mcul3910}+{Mcul3911}+{Mcul3912}+{Mcul3913}+{Mcul3914}+{Mcul3916}+"
+                        "{Mcul3917}+{Mcul3918}+{Mcul3919}+({Mcul40}*2)", "ind_3077")
+    ind_3107 = Indicador("({Mcul15}*3)+{Mcul161}*1+{Mcul162}*1+({Mcul18}*2)", "ind_3107")
     ind_3123 = Indicador("{A9}+{B9}+{C9}+{D9}+{E9}+{F9}", "ind_3123")
     ind_4040 = Indicador("{A10}+{B10}+{C10}+{D10}+{E10}+{F10}+{G10}+{H10}", "ind_4040")
     ind_3006 = Indicador("{A11}+{B11}+{C11}+{D11}+{E11}+({F11}*2)", "ind_3006")
@@ -161,9 +173,9 @@ if "__main__" == __name__:
     ind_4021 = Indicador("(({NVBP}/{TOT_NV}) + ({NVPN}/{TOT_NV}))/2", "ind_4021")
     ind_3048 = Indicador("{A14}+{B14}+{C14}+{D14}+{E14}", "ind_3048")
     ind_4016 = Indicador("{TX_HOMIC}", "ind_4016")
-    ind_4017 = Indicador("({MEDU114}*3)+({MASS2411}*3)+({MASS2418}*2)+{MASS2614}", "ind_4017")
+    ind_4017 = Indicador("({Medu114}*3)+({MASS2411}*3)+({MASS2418}*2)+{MASS2614}", "ind_4017")
     ind_3007 = Indicador("({A15}*2)+{B15}+({C15}*2)+{D15}+({E15}*2)+({F15}*2)+({G15}*2)", "ind_3007")
-    ind_4042 = Indicador("{MGRD01}+{MGRD06}+{MGDR07}+{MGDR08}+{MGDR11}+{MGRD14}", "ind_4042")
+    ind_4042 = Indicador("{Mgrd01}+{Mgrd06}+{Mgrd07}+{Mgrd08}+{Mgrd11}+{Mgrd14}", "ind_4042")
     ind_3039 = Indicador("({A100}*3)+{A107}+{A108}+{A109}+{A110}+{A111}+{A113}", "ind_3039")
     ind_4039 = Indicador("{A16} + {B16} + {C16}", "ind_4039")
     ind_4043 = Indicador("({MPPM01}*3)+{MPPM101}+{MPPM102}+(({MPPM103}+{MPPM104}+{MPPM105})*2)", "ind_4043")
@@ -177,7 +189,7 @@ if "__main__" == __name__:
     ind_4047 = Indicador("(({ES006}+{ES014}+{ES015})/({ES005}+{ES013}))*100", "ind_4047")
     ind_4007 = Indicador("({CS026}/{CO119})*100", "ind_4007")
     ind_4014 = Indicador("{A20}+{B20}+{C20}+{D20}", "ind_4014")
-    ind_4030 = Indicador("(({MMAM10}+{MMAM16})*2)+{MMAM18}+{MMAM203}+{MMAM204}+{MMAM207}+{MMAM208}+{MMAM209}+{MMAM2010}", "ind_4030")
+    ind_4030 = Indicador("(({Mmam10}+{Mmam16})*2)+{Mmam18}+{Mmam203}+{Mmam204}+{Mmam207}+{Mmam208}+{Mmam209}+{Mmam2010}", "ind_4030")
     ind_3056 = Indicador("{A21}+{B21}+{C21}+{D21}+{E21}+{F21}+{G21}+{H21}+{I21}+{J21}+{K21}+{L21}", "ind_3056")
     ind_3113 = Indicador("{A22}+{B22}+{C22}+{D22}", "ind_3113")
     ind_3043 = Indicador("{A23}+({B23}*3)+({C23}*2)+({D23}*3)", "ind_3043")
@@ -264,9 +276,10 @@ if "__main__" == __name__:
     def save_dict(dict):
         df = pd.DataFrame.from_dict(dict, orient="index")
         df.to_csv("data.csv")
-
+        
     # Extrair apenas os municipios para analise
     dados_lista = dados_lista[6:7]
+    print(dados_lista)
     # dados_lista = dados_lista[7]
     save_ind = False
 
@@ -277,9 +290,9 @@ if "__main__" == __name__:
         dict_ind = {'indicador':'resultado'}
         for ind in lista_indicadores:
             res = ind.calcular_indicador(dados)
-            print("######   Resultado: ", res)
-            print("######   Nome: ", ind.nome)
-            print("######   DICT: ", dict_ind)
+            # print("######   Resultado: ", res)
+            # print("######   Nome: ", ind.nome)
+            # print("######   DICT: ", dict_ind)
             dict_ind.update({ind.nome:res})
             if save_ind:
                 save_dict(dict_ind)
@@ -319,7 +332,7 @@ if "__main__" == __name__:
 
     print("###########Maturidade INDICADORES CALCULADA ##############")
     # for ind in lista_indicadores:
-    #     res = ind.calcular_maturidade()
+        # res = ind.calcular_maturidade()
 
     print("###########Maturidade TOPICOS CALCULADA ##############")
 

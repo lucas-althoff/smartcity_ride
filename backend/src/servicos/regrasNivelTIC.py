@@ -623,17 +623,17 @@ def maturidade_3003(valor):
 
 def maturidade_3011(valor):
     # 3011 – Taxa de analfabetismo
-    if valor <= .5 and valor >= .2:
+    if valor >= .4:
         return 1
-    if valor <= .199 and valor >= .094:
+    if valor <= .399 and valor >= .188:
         return 2
-    if valor <= .0939 and valor >= .068:
+    if valor <= .1887 and valor >= .136:
         return 3
-    if valor <= .0679 and valor >= .048:
+    if valor <= .135 and valor >= .096:
         return 4
-    if valor <= .0479 and valor >= .03:
+    if valor <= .095 and valor >= .06:
         return 5
-    if valor <= .029 and valor >= .01:
+    if valor <= .059 and valor >= .01:
         return 6
     if valor <= .009:
         return 7

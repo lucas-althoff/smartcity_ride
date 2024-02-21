@@ -26,14 +26,14 @@ dict_indicators = {
     "ind_3027": ['CO164', 'POP_TOT'],  # SNIS ok
     "ind_3122": ['CS001'],  # SNIS ok
     "ind_3020": ['EDOC_AGSN', 'EDOC_total'],  # IBGE ok
-    "ind_4041": ['MHAB18', 'MHAB182', 'MHAB183', 'MHAB201', 'MHAB202', 'MHAB203', 'MHAB204', 'MHAB205', 'MHAB206', 'MHAB207', 'MHAB21'],  # MUNIC 2020 ok
-    "ind_4045": ['MHAB191', 'MHAB192', 'MHAB193', 'MHAB194'],  # MUNIC 2020 ok
+    "ind_4041": ['Mhab18', 'Mhab182', 'Mhab183', 'Mhab201', 'Mhab202', 'Mhab203', 'Mhab204', 'Mhab205', 'Mhab206', 'Mhab207', 'Mhab21'],  # MUNIC 2020 ok
+    "ind_4045": ['Mhab191', 'Mhab192', 'Mhab193', 'Mhab194'],  # MUNIC 2020 ok
     "ind_3049": ['A1', 'B1', 'C1', 'D1'],  # Coleta direta ok
     "ind_3076": ['A2', 'B2', 'C2', 'D2'],  # Coleta direta ok
-    "ind_3124": ['MTRA181', 'MTRA182', 'MTRA183', 'MTRA184', 'MTRA185', 'MTRA186', 'MTRA187', 'MTRA19', 'MTRA23'],  # MUNIC 2020 ok
+    "ind_3124": ['Mtra181', 'Mtra182', 'Mtra183', 'Mtra184', 'Mtra185', 'Mtra186', 'Mtra187', 'Mtra19', 'Mtra23'],  # MUNIC 2020 ok
     "ind_4011": ['A3', 'B3', 'C3', 'D3', 'E3', 'F3'],  # Coleta direta ok
-    "ind_4031": ['MTRA086', 'MTRA21', 'MTRA221', 'MTRA222', 'MTRA223'],  # MUNIC 2020 ok
-    "ind_4046": ['MTRA085', 'MTRA24', 'MTRA25'],  # MUNIC 2020 ok
+    "ind_4031": ['Mtra086', 'Mtra21', 'Mtra221', 'Mtra222', 'Mtra223'],  # MUNIC 2020 ok
+    "ind_4046": ['Mtra085', 'Mtra24', 'Mtra25'],  # MUNIC 2020 ok
     # IBGE (possui urbanização) - a nomenclatura do MMCISB não está adequada com o levantamento do CENSO
     "ind_4005": ['existe_pavimentacao', 'total_pavimentacao'],
     "ind_3021": ['Acesso_SCM'],  # Computar a qnt de acessos por município  - Acesso_SCM: considerado o acesso médio mensal considerando os dados de 2023
@@ -59,12 +59,12 @@ dict_indicators = {
     "ind_3086": ['N', 'P'],  # Informação não encontrada
     "ind_3115": ['QT_VAGA_TOTAL', 'POP_TOT'],  # A confirmar 100_000mil
     "ind_4006": ['A8', 'B8', 'C8', 'D8', 'E8', 'F8', 'G8'],  # Coleta direta ok
-    "ind_4020": ['MEDU131', 'MEDU132', 'MEDU133', 'MEDU134'],  # MUNIC 2021 ok
+    "ind_4020": ['Medu131', 'Medu132', 'Medu133', 'Medu134'],  # MUNIC 2021 ok
     "ind_4034": ['DIST_IDADE_SERIE'],  # Censo Escolar 2022 ok
     "ind_4037": ['IN_INTERNET', 'ESC_MUN'],  # Censo Escolar 2022 ok
     "ind_4048": ['QT_DESKTOP_ALUNO', 'QT_COMP_PORTATIL_ALUNO', 'QT_MATRICULAS'],  # Censo Escolar 2022 ok # 100mil
-    "ind_3077": ['MCUL3901', 'MCUL3902', 'MCUL3903', 'MCUL3904', 'MCUL3905', 'MCUL3906', 'MCUL3907', 'MCUL3908', 'MCUL3909', 'MCUL3910', 'MCUL3911', 'MCUL3912', 'MCUL3913', 'MCUL3914', 'MCUL3916', 'MCUL3917', 'MCUL3918', 'MCUL3919', 'MCUL40'],  # MUNIC 2021 ok
-    "ind_3107": ['MCUL15', 'MCUL161', 'MCUL162', 'MCUL18'],  # MUNIC 2021 ok - MCUL18 coletado do MUNIC 2021 ok
+    "ind_3077": ['Mcul3901', 'Mcul3902', 'Mcul3903', 'Mcul3904', 'Mcul3905', 'Mcul3906', 'Mcul3907', 'Mcul3908', 'Mcul3909', 'Mcul3910', 'Mcul3911', 'Mcul3912', 'Mcul3913', 'Mcul3914', 'Mcul3916', 'Mcul3917', 'Mcul3918', 'Mcul3919', 'Mcul40'],  # MUNIC 2021 ok
+    "ind_3107": ['Mcul15', 'Mcul161', 'Mcul162', 'Mcul18'],  # MUNIC 2021 ok - Mcul18 coletado do MUNIC 2021 ok
     "ind_3123": ['A9', 'B9', 'C9', 'D9', 'E9', 'F9'],  # Coleta direta ok
     "ind_4040": ['A10', 'B10', 'C10', 'D10', 'E10', 'F10', 'G10', 'H10'],  # Coleta direta ok
     "ind_3006": ['A11', 'B11', 'C11', 'D11', 'E11', 'F11'],  # Coleta direta ok
@@ -75,9 +75,9 @@ dict_indicators = {
     "ind_4021": ['NVBP', 'TOT_NV', 'NVPN'],  # DataSus - Tabnet ok - http://tabnet.datasus.gov.br/cgi/tabcgi.exe?sinasc/cnv/nvbr.def
     "ind_3048": ['A14', 'B14', 'C14', 'D14', 'E14'],  # Coleta direta ok
     "ind_4016": ['TX_HOMIC'],  # 100 mil - Mapa da Violência 2021 - Utilizamos Taxa de homicidio
-    "ind_4017": ['MEDU114', 'MASS2411', 'MASS2418', 'MASS2614'],  # MASS extraídos do MUNIC 2018 - MEDU extraído do MUNIC 2021
+    "ind_4017": ['Medu114', 'MASS2411', 'MASS2418', 'MASS2614'],  # MASS extraídos do MUNIC 2018 - MEDU extraído do MUNIC 2021
     "ind_3007": ['A15', 'B15', 'C15', 'D15', 'E15', 'F15', 'G15'],  # Coleta direta ok
-    "ind_4042": ['MGRD01', 'MGRD06', 'MGDR07', 'MGDR08', 'MGDR11', 'MGRD14'],  # MUNIC 2020 ok
+    "ind_4042": ['Mgrd01', 'Mgrd06', 'Mgrd07', 'Mgrd08', 'Mgrd11', 'Mgrd14'],  # MUNIC 2020 ok
     "ind_3039": ['A100', 'A107', 'A108', 'A109', 'A110', 'A111', 'A113'],  # MUNIC 2014 ok
     "ind_4039": ['A16', 'B16', 'C16'],  # Coleta direta ok
     "ind_4043": ['MPPM01', 'MPPM101', 'MPPM102', 'MPPM103', 'MPPM104', 'MPPM105'],  # MUNIC 2018 ok
@@ -90,7 +90,7 @@ dict_indicators = {
     "ind_4047": ['ES006', 'ES014', 'ES015', 'ES005', 'ES013'],  # SNIS 2022 ok
     "ind_4007": ['CS026', 'CO119'],  # SNIS 2022 ok
     "ind_4014": ['A20', 'B20', 'C20', 'D20'],  # Coleta direta ok
-    "ind_4030": ['MMAM10', 'MMAM16', 'MMAM18', 'MMAM203', 'MMAM204', 'MMAM207', 'MMAM208', 'MMAM209', 'MMAM2010'],  # MUNIC 2020 ok
+    "ind_4030": ['Mmam10', 'Mmam16', 'Mmam18', 'Mmam203', 'Mmam204', 'Mmam207', 'Mmam208', 'Mmam209', 'Mmam2010'],  # MUNIC 2020 ok
     "ind_3056": ['A21', 'B21', 'C21', 'D21', 'E21', 'F21', 'G21', 'H21', 'I21', 'J21', 'K21', 'L21'],  # Coleta direta ok
     "ind_3113": ['A22', 'B22', 'C22', 'D22'],  # Coleta direta ok
     "ind_3043": ['A23', 'B23', 'C23', 'D23'],  # Coleta direta ok
@@ -111,14 +111,14 @@ ind_3141 = (ES026/G12A)*100
 ind_3027 = (CO164/POP_TOT)*100
 ind_3122 = CS001
 ind_3020 = EDOC_AGSN/EDOC_total
-ind_4041 = MHAB18+MHAB182+MHAB183+MHAB201+MHAB202+MHAB203+MHAB204+MHAB205+MHAB206+MHAB207+MHAB21
-ind_4045 = MHAB191+MHAB192+MHAB193+MHAB194
+ind_4041 = Mhab18+Mhab182+Mhab183+Mhab201+Mhab202+Mhab203+Mhab204+Mhab205+Mhab206+Mhab207+Mhab21
+ind_4045 = Mhab191+Mhab192+Mhab193+Mhab194
 ind_3049 = (A1*2)+B1+C1+D1
 ind_3076 = A2+B2+C2+D2
-ind_3124 = MTRA181+(MTRA182*3)+(MTRA183*2)+(MTRA184*2)+(MTRA185*3)+MTRA186+MTRA187+(MTRA19*3)+MTRA23
+ind_3124 = Mtra181+(Mtra182*3)+(Mtra183*2)+(Mtra184*2)+(Mtra185*3)+Mtra186+Mtra187+(Mtra19*3)+Mtra23
 ind_4011 = (A3*3)+B3+C3+D3+(E3*2)+(F3*2)
-ind_4031 = MTRA086+MTRA21+MTRA221+MTRA222+MTRA223
-ind_4046 = MTRA085+(MTRA24*2)+MTRA25
+ind_4031 = Mtra086+Mtra21+Mtra221+Mtra222+Mtra223
+ind_4046 = Mtra085+(Mtra24*2)+Mtra25
 ind_4005 = (existe_pavimentacao/total_pavimentacao)*100
 ind_3021 = (Acesso_SCM/POP_TOT)*100
 ind_3022 = (TOT_ACESSOS/POP_TOT)*100
@@ -150,14 +150,14 @@ ind_3011 = (TX_ANALF)*100
 ind_3086 = N/P
 ind_3115 = QT_VAGA_TOTAL/POP_TOT #100_000mil
 ind_4006 = A8+B8+C8+D8+E8+F8+G8
-ind_4020 = MEDU131+MEDU132+MEDU133+MEDU134
+ind_4020 = Medu131+Medu132+Medu133+Medu134
 ind_4034 = DIST_IDADE_SERIE
 ind_4037 = (IN_INTERNET/ESC_MUN)*100
 ind_4048 = ((QT_DESKTOP_ALUNO+QT_COMP_PORTATIL_ALUNO)/QT_MATRICULAS) #100mil
-ind_3077 = (MCUL3901*2)+(MCUL3902*2)+(MCUL3903*2)+(MCUL3904*2)+(MCUL3905*2)+(MCUL3906*2)
-+(MCUL3907*2)+MCUL3908+MCUL3909+MCUL3910+MCUL3911+MCUL3912+MCUL3913+MCUL3914+MCUL3916+MCUL3917
-+MCUL3918+MCUL3919+(MCUL40*2)
-ind_3107 = (MCUL15*3)+MCUL161*1+MCUL162*1+(MCUL18*2)
+ind_3077 = (Mcul3901*2)+(Mcul3902*2)+(Mcul3903*2)+(Mcul3904*2)+(Mcul3905*2)+(Mcul3906*2)
++(Mcul3907*2)+Mcul3908+Mcul3909+Mcul3910+Mcul3911+Mcul3912+Mcul3913+Mcul3914+Mcul3916+Mcul3917
++Mcul3918+Mcul3919+(Mcul40*2)
+ind_3107 = (Mcul15*3)+Mcul161*1+Mcul162*1+(Mcul18*2)
 ind_3123 = A9+B9+C9+D9+E9+F9
 ind_4040 = A10+B10+C10+D10+E10+F10+G10+H10
 ind_3006 = A11+B11+C11+D11+E11+(F11*2)
@@ -168,9 +168,9 @@ ind_4004 = A13+B13+C13+D13+(E13*2)
 ind_4021 = ((NVBP/TOT_NV) + (NVPN/TOT_NV))/2
 ind_3048 = A14+B14+C14+D14+E14
 ind_4016 = TX_HOMIC #100 mil
-ind_4017 = (MEDU114*3)+(MASS2411*3)+(MASS2418*2)+MASS2614
+ind_4017 = (Medu114*3)+(MASS2411*3)+(MASS2418*2)+MASS2614
 ind_3007 = (A15*2)+B15+(C15*2)+D15+(E15*2)+(F15*2)+(G15*2)
-ind_4042 = MGRD01+MGRD06+MGDR07+MGDR08+MGDR11+MGRD14
+ind_4042 = Mgrd01+Mgrd06+Mgrd07+Mgrd08+Mgrd11+Mgrd14
 ind_3039 = (A100*3)+A107+A108+A109+A110+A111+A113
 ind_4039 = A16 + B16 + C16
 ind_4043 = (MPPM01*3)+MPPM101+MPPM102+((MPPM103+MPPM104+MPPM105)*2)
@@ -186,7 +186,7 @@ ind_3042 = A19+(B19*3)+C19
 ind_4047 = ((ES006+ES014+ES015)/(ES005+ES013))*100
 ind_4007 = (CS026/CO119)*100
 ind_4014 = A19+B19+C19+D19
-ind_4030 = ((MMAM10+MMAM16)*2)+MMAM18+MMAM203+MMAM204+MMAM207+MMAM208+MMAM209+MMAM2010
+ind_4030 = ((Mmam10+Mmam16)*2)+Mmam18+Mmam203+Mmam204+Mmam207+Mmam208+Mmam209+Mmam2010
 ind_3056 = A21+B21+C21+D21+E21+F21+G21+H21+I21+J21+K21+L21
 ind_3113 = A22+B22+C22+D22
 ind_3043 = A23+(B23*3)+(C23*2)+(D23*3)
@@ -230,13 +230,13 @@ I20,
 J20,
 K20,
 L20,
-MMAM18,
-MMAM203,
-MMAM204,
-MMAM207,
-MMAM208,
-MMAM209,
-MMAM2010
+Mmam18,
+Mmam203,
+Mmam204,
+Mmam207,
+Mmam208,
+Mmam209,
+Mmam2010
 A19,
 B19,
 C19,
@@ -297,12 +297,12 @@ A109,
 A110,
 A111,
 A113
-MGRD01,
-MGRD06,
-MGDR07,
-MGDR08,
-MGDR11
-MGRD14,
+Mgrd01,
+Mgrd06,
+Mgrd07,
+Mgrd08,
+Mgrd11
+Mgrd14,
 A14,
 B14,
 C14,
@@ -310,7 +310,7 @@ D14,
 E14,
 F14,
 G14,
-MEDU114,
+Medu114,
 MASS2411,
 MASS2418,
 MASS2614
@@ -351,29 +351,29 @@ C8,
 D8,
 E8,
 F8,
-MCUL15,
-MCUL161,
-MCUL162,
-MCUL18
-MCUL3901,
-MCUL3902,
-MCUL3903,
-MCUL3904,
-MCUL3905,                                                    
-MCUL3906,
-MCUL3907,
-MCUL3908,
-MCUL3909,
-MCUL3910,
-MCUL3911,
-MCUL3912,
-MCUL3913,
-MCUL3914,
-MCUL3916,
-MCUL3917,
-MCUL3918,
-MCUL3919,
-MCUL40,
+Mcul15,
+Mcul161,
+Mcul162,
+Mcul18
+Mcul3901,
+Mcul3902,
+Mcul3903,
+Mcul3904,
+Mcul3905,                                                    
+Mcul3906,
+Mcul3907,
+Mcul3908,
+Mcul3909,
+Mcul3910,
+Mcul3911,
+Mcul3912,
+Mcul3913,
+Mcul3914,
+Mcul3916,
+Mcul3917,
+Mcul3918,
+Mcul3919,
+Mcul40,
 ESC_MUN,
 QT_DESKTOP_ALUNO,
 QT_COMP_PORTATIL_ALUNO,
@@ -381,10 +381,10 @@ QT_MATRICULAS
 IN_INTERNET,
 TOT_ESC
 DIST_IDADE_SERIE,
-MEDU131,
-MEDU132,
-MEDU133,
-MEDU134,
+Medu131,
+Medu132,
+Medu133,
+Medu134,
 A7,
 B7,
 C7,
@@ -461,24 +461,24 @@ TOT_ACESSOS,
 Acesso_SCM,
 existe_pavimentacao,
 total_pavimentacao
-MTRA085,
-MTRA24,
-MTRA25,
-MHAB18, 
-MHAB182, 
-MHAB183, 
-MHAB201,
-MHAB202,
-MHAB203,
-MHAB204,
-MHAB205,
-MHAB206,
-MHAB207,
-MHAB21,
-MHAB191,
-MHAB192,
-MHAB193,
-MHAB194,
+Mtra085,
+Mtra24,
+Mtra25,
+Mhab18, 
+Mhab182, 
+Mhab183, 
+Mhab201,
+Mhab202,
+Mhab203,
+Mhab204,
+Mhab205,
+Mhab206,
+Mhab207,
+Mhab21,
+Mhab191,
+Mhab192,
+Mhab193,
+Mhab194,
 A1,
 B1,
 C1,
@@ -487,26 +487,26 @@ A2,
 B2,
 C2,
 D2,
-MTRA181,
-MTRA182,
-MTRA183,
-MTRA184,
-MTRA185,
-MTRA186,
-MTRA187,
-MTRA19,
-MTRA23
+Mtra181,
+Mtra182,
+Mtra183,
+Mtra184,
+Mtra185,
+Mtra186,
+Mtra187,
+Mtra19,
+Mtra23
 A3,
 B3,
 C3,
 D3,
 E3,
 F3,
-MTRA086,
-MTRA21,
-MTRA221,
-MTRA222,
-MTRA223
+Mtra086,
+Mtra21,
+Mtra221,
+Mtra222,
+Mtra223
 """
 
 variaveis_tic = {
@@ -577,24 +577,24 @@ variaveis_tic = {
     67: 'Acesso_SCM',
     68: 'existe_pavimentacao',
     69: 'total_pavimentacao',
-    70: 'MTRA085',
-    71: 'MTRA24',
-    72: 'MTRA25',
-    73: 'MHAB18',
-    74: 'MHAB182',
-    75: 'MHAB183',
-    76: 'MHAB201',
-    77: 'MHAB202',
-    78: 'MHAB203',
-    79: 'MHAB204',
-    80: 'MHAB205',
-    81: 'MHAB206',
-    82: 'MHAB207',
-    83: 'MHAB21',
-    84: 'MHAB191',
-    85: 'MHAB192',
-    86: 'MHAB193',
-    87: 'MHAB194',
+    70: 'Mtra085',
+    71: 'Mtra24',
+    72: 'Mtra25',
+    73: 'Mhab18',
+    74: 'Mhab182',
+    75: 'Mhab183',
+    76: 'Mhab201',
+    77: 'Mhab202',
+    78: 'Mhab203',
+    79: 'Mhab204',
+    80: 'Mhab205',
+    81: 'Mhab206',
+    82: 'Mhab207',
+    83: 'Mhab21',
+    84: 'Mhab191',
+    85: 'Mhab192',
+    86: 'Mhab193',
+    87: 'Mhab194',
     88: 'A1',
     89: 'B1',
     90: 'C1',
@@ -603,26 +603,26 @@ variaveis_tic = {
     93: 'B2',
     94: 'C2',
     95: 'D2',
-    96: 'MTRA181',
-    97: 'MTRA182',
-    98: 'MTRA183',
-    99: 'MTRA184',
-    100: 'MTRA185',
-    101: 'MTRA186',
-    102: 'MTRA187',
-    103: 'MTRA19',
-    104: 'MTRA23',
+    96: 'Mtra181',
+    97: 'Mtra182',
+    98: 'Mtra183',
+    99: 'Mtra184',
+    100: 'Mtra185',
+    101: 'Mtra186',
+    102: 'Mtra187',
+    103: 'Mtra19',
+    104: 'Mtra23',
     105: 'A3',
     106: 'B3',
     107: 'C3',
     108: 'D3',
     109: 'E3',
     110: 'F3',
-    111: 'MTRA086',
-    112: 'MTRA21',
-    113: 'MTRA221',
-    114: 'MTRA222',
-    115: 'MTRA223',
+    111: 'Mtra086',
+    112: 'Mtra21',
+    113: 'Mtra221',
+    114: 'Mtra222',
+    115: 'Mtra223',
     556: 'POP_TOT',
     116: 'REDE_INFL_MNCP',
     117: 'PIB_PER_CAPITA',
@@ -652,13 +652,13 @@ variaveis_tic = {
     142: 'J20',
     143: 'K20',
     144: 'L20',
-    145: 'MMAM18',
-    146: 'MMAM203',
-    147: 'MMAM204',
-    148: 'MMAM207',
-    149: 'MMAM208',
-    150: 'MMAM209',
-    151: 'MMAM2010',
+    145: 'Mmam18',
+    146: 'Mmam203',
+    147: 'Mmam204',
+    148: 'Mmam207',
+    149: 'Mmam208',
+    150: 'Mmam209',
+    151: 'Mmam2010',
     152: 'A19',
     153: 'B19',
     154: 'C19',
@@ -719,12 +719,12 @@ variaveis_tic = {
     209: 'A110',
     210: 'A111',
     211: 'A113',
-    212: 'MGRD01',
-    213: 'MGRD06',
-    214: 'MGDR07',
-    215: 'MGDR08',
-    216: 'MGDR11',
-    217: 'MGRD14',
+    212: 'Mgrd01',
+    213: 'Mgrd06',
+    214: 'Mgrd07',
+    215: 'Mgrd08',
+    216: 'Mgrd11',
+    217: 'Mgrd14',
     218: 'A14',
     219: 'B14',
     220: 'C14',
@@ -732,7 +732,7 @@ variaveis_tic = {
     222: 'E14',
     223: 'F14',
     224: 'G14',
-    225: 'MEDU114',
+    225: 'Medu114',
     226: 'MASS2411',
     227: 'MASS2418',
     228: 'MASS2614',
@@ -773,29 +773,29 @@ variaveis_tic = {
     265: 'D8',
     266: 'E8',
     267: 'F8',
-    268: 'MCUL15',
-    269: 'MCUL161',
-    270: 'MCUL162',
-    271: 'MCUL18',
-    272: 'MCUL3901',
-    273: 'MCUL3902',
-    274: 'MCUL3903',
-    275: 'MCUL3904',
-    276: 'MCUL3905',
-    277: 'MCUL3906',
-    278: 'MCUL3907',
-    279: 'MCUL3908',
-    280: 'MCUL3909',
-    281: 'MCUL3910',
-    282: 'MCUL3911',
-    283: 'MCUL3912',
-    284: 'MCUL3913',
-    285: 'MCUL3914',
-    286: 'MCUL3916',
-    287: 'MCUL3917',
-    288: 'MCUL3918',
-    289: 'MCUL3919',
-    290: 'MCUL40',
+    268: 'Mcul15',
+    269: 'Mcul161',
+    270: 'Mcul162',
+    271: 'Mcul18',
+    272: 'Mcul3901',
+    273: 'Mcul3902',
+    274: 'Mcul3903',
+    275: 'Mcul3904',
+    276: 'Mcul3905',
+    277: 'Mcul3906',
+    278: 'Mcul3907',
+    279: 'Mcul3908',
+    280: 'Mcul3909',
+    281: 'Mcul3910',
+    282: 'Mcul3911',
+    283: 'Mcul3912',
+    284: 'Mcul3913',
+    285: 'Mcul3914',
+    286: 'Mcul3916',
+    287: 'Mcul3917',
+    288: 'Mcul3918',
+    289: 'Mcul3919',
+    290: 'Mcul40',
     291: 'ESC_MUN',
     292: 'QT_DESKTOP_ALUNO',
     293: 'QT_COMP_PORTATIL_ALUNO',
@@ -803,10 +803,10 @@ variaveis_tic = {
     295: 'IN_INTERNET',
     296: 'ESC_MUN',
     297: 'DIST_IDADE_SERIE',
-    298: 'MEDU131',
-    299: 'MEDU132',
-    300: 'MEDU133',
-    301: 'MEDU134',
+    298: 'Medu131',
+    299: 'Medu132',
+    300: 'Medu133',
+    301: 'Medu134',
     302: 'A7',
     303: 'B7',
     304: 'C7',
@@ -896,24 +896,24 @@ notas_planaltina = {
     'Acesso_SCM': 0,
     'existe_pavimentacao': 0,
     'total_pavimentacao': 0,
-    'MTRA085': 0,
-    'MTRA24': 0,
-    'MTRA25': 0,
-    'MHAB18': 0,
-    'MHAB182': 0,
-    'MHAB183': 0,
-    'MHAB201': 0,
-    'MHAB202': 0,
-    'MHAB203': 0,
-    'MHAB204': 0,
-    'MHAB205': 0,
-    'MHAB206': 0,
-    'MHAB207': 0,
-    'MHAB21': 0,
-    'MHAB191': 0,
-    'MHAB192': 0,
-    'MHAB193': 0,
-    'MHAB194': 0,
+    'Mtra085': 0,
+    'Mtra24': 0,
+    'Mtra25': 0,
+    'Mhab18': 0,
+    'Mhab182': 0,
+    'Mhab183': 0,
+    'Mhab201': 0,
+    'Mhab202': 0,
+    'Mhab203': 0,
+    'Mhab204': 0,
+    'Mhab205': 0,
+    'Mhab206': 0,
+    'Mhab207': 0,
+    'Mhab21': 0,
+    'Mhab191': 0,
+    'Mhab192': 0,
+    'Mhab193': 0,
+    'Mhab194': 0,
     'A1': 0,
     'B1': 0,
     'C1': 0,
@@ -922,26 +922,26 @@ notas_planaltina = {
     'B2': 0,
     'C2': 0,
     'D2': 0,
-    'MTRA181': 0,
-    'MTRA182': 0,
-    'MTRA183': 0,
-    'MTRA184': 0,
-    'MTRA185': 0,
-    'MTRA186': 0,
-    'MTRA187': 0,
-    'MTRA19': 0,
-    'MTRA23': 0,
+    'Mtra181': 0,
+    'Mtra182': 0,
+    'Mtra183': 0,
+    'Mtra184': 0,
+    'Mtra185': 0,
+    'Mtra186': 0,
+    'Mtra187': 0,
+    'Mtra19': 0,
+    'Mtra23': 0,
     'A3': 0,
     'B3': 0,
     'C3': 0,
     'D3': 0,
     'E3': 0,
     'F3': 0,
-    'MTRA086': 0,
-    'MTRA21': 0,
-    'MTRA221': 0,
-    'MTRA222': 0,
-    'MTRA223': 0,
+    'Mtra086': 0,
+    'Mtra21': 0,
+    'Mtra221': 0,
+    'Mtra222': 0,
+    'Mtra223': 0,
     'POP_TOT': 105_031,
     'REDE_INFL_MNCP': 0,
     'PIB_PER_CAPITA': 0,
@@ -975,13 +975,13 @@ notas_planaltina = {
     'B20': 0,
     'C20': 0,
     'D20': 0,
-    'MMAM18': 0,
-    'MMAM203': 0,
-    'MMAM204': 0,
-    'MMAM207': 0,
-    'MMAM208': 0,
-    'MMAM209': 0,
-    'MMAM2010': 0,
+    'Mmam18': 0,
+    'Mmam203': 0,
+    'Mmam204': 0,
+    'Mmam207': 0,
+    'Mmam208': 0,
+    'Mmam209': 0,
+    'Mmam2010': 0,
     'A19': 0,
     'B19': 0,
     'C19': 0,
@@ -1044,18 +1044,18 @@ notas_planaltina = {
     'A110': 0,
     'A111': 0,
     'A113': 0,
-    'MGRD01': 0,
-    'MGRD06': 0,
-    'MGDR07': 0,
-    'MGDR08': 0,
-    'MGDR11': 0,
-    'MGRD14': 0,
+    'Mgrd01': 0,
+    'Mgrd06': 0,
+    'Mgrd07': 0,
+    'Mgrd08': 0,
+    'Mgrd11': 0,
+    'Mgrd14': 0,
     'A14': 0,
     'B14': 0,
     'C14': 0,
     'D14': 0,
     'E14': 1,
-    'MEDU114': 0,
+    'Medu114': 0,
     'MASS2411': 0,
     'MASS2418': 0,
     'MASS2614': 0,
@@ -1098,39 +1098,39 @@ notas_planaltina = {
     'E8': 1,
     'F8': 0,
     'G8': 0,
-    'MCUL15': 0,
-    'MCUL161': 0,
-    'MCUL162': 0,
-    'MCUL18': 0,
-    'MCUL3901': 0,
-    'MCUL3902': 0,
-    'MCUL3903': 0,
-    'MCUL3904': 0,
-    'MCUL3905': 0,
-    'MCUL3906': 0,
-    'MCUL3907': 0,
-    'MCUL3908': 0,
-    'MCUL3909': 0,
-    'MCUL3910': 0,
-    'MCUL3911': 0,
-    'MCUL3912': 0,
-    'MCUL3913': 0,
-    'MCUL3914': 0,
-    'MCUL3916': 0,
-    'MCUL3917': 0,
-    'MCUL3918': 0,
-    'MCUL3919': 0,
-    'MCUL40': 0,
+    'Mcul15': 0,
+    'Mcul161': 0,
+    'Mcul162': 0,
+    'Mcul18': 0,
+    'Mcul3901': 0,
+    'Mcul3902': 0,
+    'Mcul3903': 0,
+    'Mcul3904': 0,
+    'Mcul3905': 0,
+    'Mcul3906': 0,
+    'Mcul3907': 0,
+    'Mcul3908': 0,
+    'Mcul3909': 0,
+    'Mcul3910': 0,
+    'Mcul3911': 0,
+    'Mcul3912': 0,
+    'Mcul3913': 0,
+    'Mcul3914': 0,
+    'Mcul3916': 0,
+    'Mcul3917': 0,
+    'Mcul3918': 0,
+    'Mcul3919': 0,
+    'Mcul40': 0,
     'ESC_MUN': 1,
     'QT_DESKTOP_ALUNO': 0,
     'QT_COMP_PORTATIL_ALUNO': 0,
     'QT_MATRICULAS': 0,
     'IN_INTERNET': 0,
     'DIST_IDADE_SERIE': 0,
-    'MEDU131': 0,
-    'MEDU132': 0,
-    'MEDU133': 0,
-    'MEDU134': 0,
+    'Medu131': 0,
+    'Medu132': 0,
+    'Medu133': 0,
+    'Medu134': 0,
     'A7': 0,
     'B7': 0,
     'C7': 0,
