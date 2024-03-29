@@ -1255,9 +1255,11 @@ class SOn():
         cq3 = ["SERV03.a", "SERV03.b", "SERV03.c", "SERV03.d",
                "SERV03.e", "SERV03.f", "SERV03.g", "SERV03.h",
                "SERV03.i", "SERV03.j", "SERV03.k", "SERV03.l"]
+        
+        cq31 = ["SERV03.h","SERV03.i","SERV03.l"]
 
-        self.qualificadores = {f"{self.componente}1": {'cq1': cq11, 'cq2': cq2, 'cq3': cq3},
-                               f"{self.componente}2": {'cq1': cq12, 'cq2': cq2, 'cq3': cq3},
+        self.qualificadores = {f"{self.componente}1": {'cq1': cq11, 'cq2': cq2, 'cq3': cq3, 'cq31': cq31},
+                               f"{self.componente}2": {'cq1': cq12, 'cq2': cq2, 'cq3': cq3, 'cq31': cq31},
                                f"{self.componente}3": {'cq1': cq13, 'cq2': cq2, 'cq3': cq3},
                                f"{self.componente}4": {'cq1': cq14, 'cq2': cq2, 'cq3': cq3},
                                f"{self.componente}5": {'cq1': cq15, 'cq2': cq2, 'cq3': cq3},
@@ -1265,26 +1267,23 @@ class SOn():
 
     def verificador_interno(self, respostas, nivel):
         if pd.isna(respostas["SERV01"]):
-            return False 
+            return False
         match nivel:
-            case 1:   
+            case 1:
                 c1 = sum([v in respostas["SERV01"] for v in self.qualificadores[f"{self.componente}1"]["cq1"]]) >= 3
                 c2 = not any([v in respostas["SERV02"] for v in self.qualificadores[f"{self.componente}1"]["cq2"]])
                 c3 = not any([v in respostas["SERV03"] for v in self.qualificadores[f"{self.componente}1"]["cq3"]])
+                c31 = any([v in respostas["SERV03"] for v in self.qualificadores[f"{self.componente}1"]["cq31"]])
                 c4 = "SERV04.a" in respostas["SERV04"]
                 c5 = "SERV05.b" in respostas["SERV05"] and "SERV05.c" in respostas["SERV05"]
-                # print("C1 = ", c1, sum([v in respostas["SERV01"] for v in self.qualificadores[f"{self.componente}1"]["cq1"]]))
-                # print("C2 = ", c2)
-                # print("C3 = ", c3)
-                # print("C4 = ", c4)
-                # print("C5 = ", c5)
-                if c1 and c2 and c3 and c4 and c5:  # Critério triplo qualificadores
+                if c1 and c2 and c3 and c31 and c4 and c5:  # Critério triplo qualificadores
                     return True
                 return False
             case 2:
                 c1 = sum([v in respostas["SERV01"] for v in self.qualificadores[f"{self.componente}1"]["cq1"]]) >= 3
                 c2 = any([v in respostas["SERV02"] for v in self.qualificadores[f"{self.componente}1"]["cq2"]])
                 c3 = "SERV03.e" in respostas["SERV03"] or "SERV03.f" in respostas["SERV03"]
+                c31 = any([v in respostas["SERV03"] for v in self.qualificadores[f"{self.componente}1"]["cq31"]])
                 c4 = "SERV04.a" in respostas["SERV04"] and "SERV04.b" in respostas["SERV04"]
                 c5 = "SERV05.a" in respostas["SERV05"] and "SERV05.1.a" in respostas["SERV05.1"]
                 print("C1 = ", c1, sum([v in respostas["SERV01"] for v in self.qualificadores[f"{self.componente}1"]["cq1"]]))
@@ -1292,7 +1291,7 @@ class SOn():
                 print("C3 = ", c3)
                 print("C4 = ", c4)
                 print("C5 = ", c5)
-                if c1 and c2 and c3 and c4 and c5:  # Critério triplo qualificadores
+                if c1 and c2 and c3 and c31 and c4 and c5:  # Critério triplo qualificadores
                     return True
                 return False
             case 3:

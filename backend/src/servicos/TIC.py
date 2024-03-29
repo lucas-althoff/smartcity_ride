@@ -36,14 +36,14 @@ dict_indicators = {
     "ind_4046": ['Mtra085', 'Mtra24', 'Mtra25'],  # MUNIC 2020 ok
     # IBGE (possui urbanização) - a nomenclatura do MMCISB não está adequada com o levantamento do CENSO
     "ind_4005": ['existe_pavimentacao', 'total_pavimentacao'],
-    "ind_3021": ['Acesso_SCM'],  # Computar a qnt de acessos por município  - Acesso_SCM: considerado o acesso médio mensal considerando os dados de 2023
+    "ind_3021": ['Acesso_SCM','POP_TOT'],  # Computar a qnt de acessos por município  - Acesso_SCM: considerado o acesso médio mensal considerando os dados de 2023
     "ind_3022": ['TOT_ACESSOS', 'POP_TOT'],  # Informação não encontrada nas bases abertas da ANATEL https://www.gov.br/anatel/pt-br/dados/dados-abertos
     "ind_3040": ['3G', '4G'],  # ANATEL ok
     "ind_3041": ['fornecedores'],  # ANATEL ok
     "ind_3134": ['A4', 'B4', 'C4', 'D4', 'E4'],  # Coleta direta ok
     # ANATEL ok - Foi considerado o acesso médio mensal considerando os dados de 2023, com filtro para velocidade acima de 12Mbps
     "ind_4035": ['Acesso_SCM_12Mbps', 'POP_TOT'],
-    "ind_4036": ['QNTD_EST_SMP', 'POP_TOT'],  # ANATEL (verificar)
+    "ind_4036": ['QNTD_EST', 'POP_TOT'],  # ANATEL (verificar)
     "ind_4024": ['MTIP07', 'MTIP081', 'MTIP082', 'MTIP083'],  # MUNIC 2018 ok
     "ind_4025": ['MTIP09', 'MTIP101', 'MTIP102', 'MTIP103', 'MTIP104', 'MTIP105', 'MTIP106'],  # MUNIC 2020 ok
     "ind_4032": ['MTIP11', 'MTIP121', 'MTIP122', 'MTIP123'],  # MUNIC 2018 ok
@@ -126,7 +126,7 @@ ind_3040 = 3G + (4G*2)
 ind_3041 = fornecedores
 ind_3134 = (A4*3)+(B4*2)+C4+D4+(E4*3)
 ind_4035 = (Acesso_SCM_12Mbps/POP_TOT)*100
-ind_4036 = (QNTD_EST_SMP/POP_TOT)*100
+ind_4036 = (QNTD_EST/POP_TOT)*100
 ind_4024 = (MTIP07*3)+MTIP081+MTIP082+MTIP083
 ind_4025 = (MTIP09*3)+MTIP101+MTIP102+MTIP103+MTIP104+MTIP105+MTIP106
 ind_4032 = (MTIP11*3)+MTIP121+MTIP122+MTIP123

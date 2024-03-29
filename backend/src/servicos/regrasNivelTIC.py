@@ -547,7 +547,7 @@ def maturidade_3077(valor):
     if valor >= 16 and valor <= 21:
         return 6
     if valor >= 22 and valor <= 27:
-        return 6
+        return 7
     return 1
 
 
@@ -735,19 +735,19 @@ def maturidade_4034(valor):
 
 def maturidade_4037(valor):
     # 4037 - Percentual de escolas municipais com acesso à internet
-    if valor < .3299:
+    if valor < 32.99:
         return 1
-    if valor >= .33 and valor <= .599:
+    if valor >= 33 and valor <= 59.9:
         return 2
-    if valor >= .6 and valor <= .7:
+    if valor >= 60 and valor <= 70:
         return 3
-    if valor >= .701 and valor <= .8:
+    if valor >= 70.1 and valor <= 80:
         return 4
-    if valor >= .801 and valor <= .9:
+    if valor >= 80.1 and valor <= 90:
         return 5
-    if valor >= .901 and valor <= .99:
+    if valor >= 90.1 and valor <= 99:
         return 6
-    if valor >= .9901 and valor <= 1:
+    if valor >= 99.01 and valor <= 1:
         return 7
     return 1
 
